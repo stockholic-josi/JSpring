@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<!-- layout -->
+	<definition name=".default">
+        <put-attribute name="title" value="TaxHolic" />
+        <put-attribute name="css" value="/WEB-INF/layouts/default/css.jsp" />
+    </definition>
+	
+	<!-- none -->
+    <definition name="none:**" extends=".default" template="/WEB-INF/layouts/none/layout.jsp" >
+        <put-attribute name="body" value="/WEB-INF/jsp/{1}.jsp" />
+    </definition>
+    
+    <!-- error -->
+    <definition name="error:**" extends=".default" template="/WEB-INF/layouts/none/layout.jsp" >
+        <put-attribute name="body" value="/WEB-INF/error/{1}.jsp" />
+    </definition>
+    
+	<!-- default -->
+    <definition name="default:**" extends=".default"  template="/WEB-INF/layouts/default/layout.jsp">
+        <put-attribute name="header" value="/WEB-INF/layouts/default/header.jsp" />
+        <put-attribute name="body" value="/WEB-INF/jsp/{1}.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/layouts/default/footer.jsp" />
+    </definition>
+    
+	<!-- popup -->
+    <definition name="popup:**" extends=".default" template="/WEB-INF/layouts/popup/layout.jsp">
+        <put-attribute name="title" value="TaxHolic" />
+        <put-attribute name="body" value="/WEB-INF/jsp/{1}.jsp" />
+    </definition>
+    
+     <!-- script -->
+    <definition name="script" template="/WEB-INF/layouts/script/script.jsp"></definition>
+	
+</tiles-definitions>
