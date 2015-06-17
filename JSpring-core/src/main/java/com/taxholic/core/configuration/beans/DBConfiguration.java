@@ -133,8 +133,10 @@ public class DBConfiguration {
 		sqlSessionFactory.setMapperLocations(resourcePatternResolver.getResources("classpath:mapper/**/*.xml"));
 		sqlSessionFactory.setDataSource(dataSource());
 		sqlSessionFactory.setCheckInterval(1000);
+		sqlSessionFactory.setProxy();
 
-		return (SqlSessionFactory) sqlSessionFactory.getParentObject();
+//		return (SqlSessionFactory) sqlSessionFactory.getParentObject();
+		return sqlSessionFactory.getObject();
     }
     
     @Bean(destroyMethod = "clearCache")

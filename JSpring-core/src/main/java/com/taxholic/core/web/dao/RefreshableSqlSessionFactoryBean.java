@@ -85,18 +85,21 @@ public class RefreshableSqlSessionFactoryBean extends SqlSessionFactoryBean impl
 
 		setRefreshable();
 	}
-
-	private void setRefreshable() {
+	
+	public void setProxy() {
 		proxy = (SqlSessionFactory) Proxy.newProxyInstance(
 				SqlSessionFactory.class.getClassLoader(),
 				new Class[] { SqlSessionFactory.class },
 				new InvocationHandler() {
-					public Object invoke(Object proxy, Method method,
-							Object[] args) throws Throwable {
-						// log.debug("method.getName() : " + method.getName());
+					public Object invoke(Object proxy, Method method,Object[] args) throws Throwable {
 						return method.invoke(getParentObject(), args);
 					}
 				});
+	}
+	
+
+	private void setRefreshable() {
+		setProxy();
 
 		task = new TimerTask() {
 			private Map<Resource, Long> map = new HashMap<Resource, Long>();
