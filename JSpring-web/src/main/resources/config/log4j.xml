@@ -49,13 +49,20 @@
       <priority value="INFO"/>
       <appender-ref ref="STDOUT"/>
        <appender-ref ref="FILE_LOG_APP" />
-    </category>   
+    </category> 
+    
+    <category name="com.taxholic.core" additivity="false">
+		<priority value="INFO"/>
+		<appender-ref ref="STDOUT" />
+    </category>  
     
       <category name="jdbc.sqlonly" additivity="false">
 		<priority value="INFO"/>
 		<appender-ref ref="STDOUT" />
 		<appender-ref ref="FILE_LOG_DAO" />
     </category>
+    
+    
     
 	<!-- 
      <category name="jdbc.resultsettable" additivity="false">

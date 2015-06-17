@@ -38,7 +38,7 @@ public class PropertiesConfiguration {
 		 EncryptablePropertySourcesPlaceholderConfigurer configurer = new EncryptablePropertySourcesPlaceholderConfigurer(configurationEncryptor());
 //	 	PropertySourcesPlaceholderConfigurer configurer = new PropertySourcesPlaceholderConfigurer();
 		ResourcePatternResolver patternResolver = new PathMatchingResourcePatternResolver();
-		Resource[] locations = patternResolver.getResources("classpath:jdbc.properties");
+		Resource[] locations = patternResolver.getResources("classpath:config/jdbc.properties");
 		configurer.setLocations(locations);
 		configurer.setIgnoreUnresolvablePlaceholders(true);
 		configurer.setIgnoreResourceNotFound(true);

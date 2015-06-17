@@ -77,8 +77,11 @@ public class WebAppInitializer implements WebApplicationInitializer {
      * Add Listener
      */
     public void addSpringCoreListener() {
-        servletContext.addListener(new ContextLoaderListener(context));
+    	
+    	servletContext.setInitParameter("log4jConfigLocation", "classpath:config/log4j.xml");
         servletContext.addListener(new Log4jConfigListener());
+    	
+        servletContext.addListener(new ContextLoaderListener(context));
     }
 
     public void setServletDispatcher() {

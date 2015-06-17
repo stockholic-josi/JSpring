@@ -1,11 +1,14 @@
 package com.taxholic.core.configuration.beans;
 
 
-import org.apache.commons.dbcp.BasicDataSource;
+import javax.sql.DataSource;
+
+
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,46 +16,103 @@ import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
+import com.taxholic.core.web.dao.RefreshableSqlSessionFactoryBean;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+
 @Configuration
 public class DBConfiguration {
 	
-	 private @Value("${mysql.jdbc.driverClassName}") String driverClassName;
-	 private @Value("${mysql.jdbc.url}") String url;
-	 private @Value("${mysql.jdbc.userName}") String userName;
-	 private @Value("${mysql.jdbc.password}") String password;
-	 private @Value("${mysql.jdbc.initialSize}") int initialSize;
-	 private @Value("${mysql.jdbc.maxActive}") int maxActive;
-	 private @Value("${mysql.jdbc.maxIdle}") int maxIdle;
-	 private @Value("${mysql.jdbc.maxWait}") int maxWait;
+	 private @Value("${jdbc.minimumIdle}") int minimumIdle;
+	 private @Value("${jdbc.maximumPoolSize}") int maximumPoolSize;
+	 private @Value("${jdbc.validationQuery}") String validationQuery;
+	 private @Value("${jdbc.connectionTimeout}") int connectionTimeout;
+	 private @Value("${jdbc.autocommit}") boolean isAutoCommit;
 	 
-	 
-	 private @Value("${sqllite.jdbc.driverClassName}") String sqlliteDriverClassName;
-	 private @Value("${sqllite.jdbc.url}") String sqlliteUrl;
+	 private @Value("${datasource.driverClassName}") String driverClassName;
+	 private @Value("${datasource.cachePrepStmts}") boolean cachePrepStmts;
+	 private @Value("${datasource.prepStmtCacheSize}") int prepStmtCacheSize;
+	 private @Value("${datasource.prepStmtCacheSqlLimit}") int prepStmtCacheSqlLimit;
+	 private @Value("${datasource.useServerPrepStmts}") boolean useServerPrepStmts;
+	 private @Value("${datasource.url}") String sqlliteUrl;
 
 	 
-	  //------------------------------------------------------------------------ MySql
-    @Bean(destroyMethod = "close")
-    public BasicDataSource  dataSource() {
+ //------------------------------------------------------------------------ MySql
+
+//	 @Bean(destroyMethod = "close")
+//    public BasicDataSource  dataSource() {
+//    	
+//    	BasicDataSource dataSource = new BasicDataSource();
+//    	
+//    	dataSource.setDriverClassName(driverClassName);
+//    	dataSource.setUrl(url);
+//    	dataSource.setUsername(userName);
+//    	dataSource.setPassword(password);
+//    	dataSource.setInitialSize(initialSize);
+//    	dataSource.setMaxActive(maxActive);
+//    	dataSource.setMaxIdle(maxIdle);
+//    	dataSource.setMaxWait(maxWait);
+//
+//        return dataSource;
+//    }
+//    
+//    @Bean
+//    public SqlSessionFactory sqlSessionFactory() throws Exception {
+//    	
+//    	SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
+//		sqlSessionFactory.setDataSource(dataSource());
+//		PathMatchingResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver();
+//		DefaultResourceLoader defaultResourceLoader = new DefaultResourceLoader();
+//		sqlSessionFactory.setConfigLocation(defaultResourceLoader.getResource("classpath:config/mybatis-config.xml"));
+//		sqlSessionFactory.setMapperLocations(resourcePatternResolver.getResources("classpath:mapper/**/*.xml"));
+//
+//		return sqlSessionFactory.getObject();
+//    }
+//    
+//    @Bean(destroyMethod = "clearCache")
+//	public SqlSessionTemplate sqlSession(SqlSessionFactory sqlSessionFactory) {
+//		SqlSessionTemplate sqlSession = new SqlSessionTemplate(sqlSessionFactory);
+//		return sqlSession;
+//	}
+//    
+//    @Bean
+//	public DataSourceTransactionManager txManager(BasicDataSource dataSource) {
+//		return new DataSourceTransactionManager(dataSource);
+//	}
+    
+    
+    
+    //------------------------------------------------------------------------ Sqlite
+    
+    @Bean(destroyMethod = "shutdown")
+    public DataSource dataSource() {
     	
-    	BasicDataSource dataSource = new BasicDataSource();
-    	
-    	dataSource.setDriverClassName(driverClassName);
-    	dataSource.setUrl(url);
-    	dataSource.setUsername(userName);
-    	dataSource.setPassword(password);
-    	dataSource.setInitialSize(initialSize);
-    	dataSource.setMaxActive(maxActive);
-    	dataSource.setMaxIdle(maxIdle);
-    	dataSource.setMaxWait(maxWait);
+        HikariConfig config = new HikariConfig();
+        
+        config.setMinimumIdle(minimumIdle);
+        config.setMaximumPoolSize(maximumPoolSize);
+        config.setConnectionTestQuery(validationQuery);
+        config.setConnectionTimeout(connectionTimeout);
+        config.setAutoCommit(isAutoCommit);
+        
+        config.addDataSourceProperty("cachePrepStmts", cachePrepStmts);
+        config.addDataSourceProperty("prepStmtCacheSize", prepStmtCacheSize);
+        config.addDataSourceProperty("useServerPrepStmts", useServerPrepStmts);
+        config.setDriverClassName(driverClassName);
+        config.setJdbcUrl(sqlliteUrl);
+
+        HikariDataSource dataSource = new HikariDataSource(config);
 
         return dataSource;
     }
     
+    
+
     @Bean
     public SqlSessionFactory sqlSessionFactory() throws Exception {
     	
     	SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
-		sqlSessionFactory.setDataSource(dataSource());
+    	sqlSessionFactory.setDataSource(dataSource());
 		PathMatchingResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver();
 		DefaultResourceLoader defaultResourceLoader = new DefaultResourceLoader();
 		sqlSessionFactory.setConfigLocation(defaultResourceLoader.getResource("classpath:config/mybatis-config.xml"));
@@ -61,54 +121,31 @@ public class DBConfiguration {
 		return sqlSessionFactory.getObject();
     }
     
+    
+    @Bean
+    public SqlSessionFactory refeshSqlSessionFactory() throws Exception {
+    	
+    	RefreshableSqlSessionFactoryBean sqlSessionFactory = new RefreshableSqlSessionFactoryBean();
+    	
+		DefaultResourceLoader defaultResourceLoader = new DefaultResourceLoader();
+		sqlSessionFactory.setConfigLocation(defaultResourceLoader.getResource("classpath:config/mybatis-config.xml"));
+		PathMatchingResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver();
+		sqlSessionFactory.setMapperLocations(resourcePatternResolver.getResources("classpath:mapper/**/*.xml"));
+		sqlSessionFactory.setDataSource(dataSource());
+		sqlSessionFactory.setCheckInterval(1000);
+
+		return (SqlSessionFactory) sqlSessionFactory.getParentObject();
+    }
+    
     @Bean(destroyMethod = "clearCache")
-	public SqlSessionTemplate sqlSession(SqlSessionFactory sqlSessionFactory) {
-		SqlSessionTemplate sqlSession = new SqlSessionTemplate(sqlSessionFactory);
+	public SqlSessionTemplate sqliteSession(SqlSessionFactory refeshSqlSessionFactory) {
+		SqlSessionTemplate sqlSession = new SqlSessionTemplate(refeshSqlSessionFactory);
 		return sqlSession;
 	}
     
     @Bean
-	public DataSourceTransactionManager txManager(BasicDataSource dataSource) {
+	public DataSourceTransactionManager txManager(@Qualifier("dataSource") DataSource dataSource) {
 		return new DataSourceTransactionManager(dataSource);
 	}
-    
-    
-    
-    //------------------------------------------------------------------------ Sqlite
-    
-//    @Bean(destroyMethod = "close")
-//    public BasicDataSource  sqliteSource() {
-//    	
-//    	BasicDataSource sqliteSource = new BasicDataSource();
-//    	
-//    	sqliteSource.setDriverClassName(sqlliteDriverClassName);
-//    	sqliteSource.setUrl(sqlliteUrl);
-//    	
-//    	return sqliteSource;
-//    }
-//
-//    @Bean
-//    public SqlSessionFactory sqlliteSessionFactory() throws Exception {
-//    	
-//    	SqlSessionFactoryBean sqlliteSessionFactory = new SqlSessionFactoryBean();
-//    	sqlliteSessionFactory.setDataSource(sqliteSource());
-//		PathMatchingResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver();
-//		DefaultResourceLoader defaultResourceLoader = new DefaultResourceLoader();
-//		sqlliteSessionFactory.setConfigLocation(defaultResourceLoader.getResource("classpath:config/mybatis-config.xml"));
-//		sqlliteSessionFactory.setMapperLocations(resourcePatternResolver.getResources("classpath:mapper/**/*.xml"));
-//
-//		return sqlliteSessionFactory.getObject();
-//    }
-//    
-//    @Bean(destroyMethod = "clearCache")
-//	public SqlSessionTemplate sqliteSession(SqlSessionFactory sqlliteSessionFactory) {
-//		SqlSessionTemplate sqliteSession = new SqlSessionTemplate(sqlliteSessionFactory);
-//		return sqliteSession;
-//	}
-    
-//    @Bean
-//	public DataSourceTransactionManager sqlitetxManager(@Qualifier("sqliteSource") BasicDataSource sqliteSource) {
-//		return new DataSourceTransactionManager(sqliteSource);
-//	}
     
 }

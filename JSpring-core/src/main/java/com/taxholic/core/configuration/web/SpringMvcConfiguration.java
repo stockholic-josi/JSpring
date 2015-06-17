@@ -23,7 +23,7 @@ import org.springframework.web.servlet.view.tiles3.TilesView;
 @Configuration
 @EnableWebMvc
 //@Import({TilesConfiguration.class, PropertiesConfiguration.class, MessageConfiguration.class, HttpClientConfiguration.class})
-@ComponentScan(basePackages = {"com.taxholic.core.configuration.beans", "com.taxholic.web"}, includeFilters = {
+@ComponentScan(basePackages = {"com.taxholic.web"}, includeFilters = {
 													@ComponentScan.Filter(Controller.class), @ComponentScan.Filter(ControllerAdvice.class)
 												  }, useDefaultFilters = false)
 public class SpringMvcConfiguration extends WebMvcConfigurerAdapter {
