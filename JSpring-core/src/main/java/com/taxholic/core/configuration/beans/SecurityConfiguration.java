@@ -13,7 +13,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.taxholic.core.authority.AuthService;
-import com.taxholic.core.authority.DaoAuthenticationProvider;
 
 
 @Configuration
@@ -22,22 +21,7 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//		auth
-//		.inMemoryAuthentication()
-//	        .withUser( "admin" )
-//	            .password( "admin" )
-//	            .roles( "ADMIN" )
-//	            .and()
-//	        .withUser( "user" )
-//	            .password( "user" )
-//	            .roles( "USER" );
-		
-		 auth        
-		 	.authenticationProvider(authenticationProvider())
-		 	.userDetailsService(authService())
-        	.passwordEncoder( new BCryptPasswordEncoder())
-             ;
-		
+		 auth.userDetailsService(authService()).passwordEncoder( new BCryptPasswordEncoder());
 	}
 	
 	@Override
@@ -84,16 +68,8 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 	}
 	
 	@Bean
-	public DaoAuthenticationProvider authenticationProvider(){
-		DaoAuthenticationProvider  authenticationProvider = new DaoAuthenticationProvider();
-		authenticationProvider.setUserDetailsService(authService());
-        return authenticationProvider;
-    }
-	
-	@Bean
     public UserDetailsService authService(){
-        UserDetailsService service = new AuthService();
-        return service;
+        return new AuthService();
     }
 	
   

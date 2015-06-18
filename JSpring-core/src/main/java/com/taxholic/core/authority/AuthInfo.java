@@ -2,20 +2,16 @@ package com.taxholic.core.authority;
 
 import java.util.ArrayList;
 
-
 import java.util.Collection;
-
 import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
-
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public class AuthInfo  implements UserDetails {
 	
 	private AuthDto user;
-	private String sessionId; 
 
 	public AuthInfo(AuthDto user) {
 		this.user = user;
@@ -26,6 +22,7 @@ public class AuthInfo  implements UserDetails {
 	}
 
 
+	@SuppressWarnings("deprecation")
 	public Collection<GrantedAuthority> getAuthorities() {
 		
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();

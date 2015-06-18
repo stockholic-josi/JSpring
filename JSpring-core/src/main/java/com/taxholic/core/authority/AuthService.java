@@ -12,6 +12,8 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.taxholic.core.web.dao.CommonDao;
@@ -34,9 +36,14 @@ public class AuthService  implements UserDetailsService {
 		
 		AuthDto dto = new AuthDto();
 		dto.setUserId(userId);
-		dto.setPassword("5efef14a32f054764285558b0d23040d");
+		dto.setPassword("$2a$10$gLUPCIeu7USWMFNpIlyGKOP19nLDS5CouFAbpQOLUdoLFU7G6myQG");
 		dto.setUserNm("메렁");
 		dto.setRoleList(role);
+		
+		String password = "1234";
+		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String encodedPassword = passwordEncoder.encode(password);
+		System.out.println("encodedPassword		1234  -->  	" + encodedPassword);
     	
 		//로그인 정보
 //		AuthDto user = new AuthDto();
