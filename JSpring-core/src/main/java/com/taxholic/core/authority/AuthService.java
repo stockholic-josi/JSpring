@@ -28,17 +28,13 @@ public class AuthService  implements UserDetailsService {
 			return null;
 		}
     	
-//		AuthDto dto = new AuthDto();
-		List role = new ArrayList();
+		List<String> role = new ArrayList<String>();
 		role.add("ADMIN");
-		role.add("USER");
-//		dto.setRoleList(role);
-		
-		System.out.println(">>>>>>>>>>>>>" + userId);
+		role.add("USR");
 		
 		AuthDto dto = new AuthDto();
 		dto.setUserId(userId);
-		dto.setPassword("1111");
+		dto.setPassword("5efef14a32f054764285558b0d23040d");
 		dto.setUserNm("메렁");
 		dto.setRoleList(role);
     	
