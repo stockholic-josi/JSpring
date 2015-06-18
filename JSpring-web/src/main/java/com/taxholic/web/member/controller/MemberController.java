@@ -39,7 +39,7 @@ public class MemberController{
 	public String info(Model model) {
 		
 		System.out.println(">>>>>> " + AuthUtil.getUser().getUserId());
-		System.out.println(">>>>>> " + AuthUtil.getUser().getPassword());
+		System.out.println(">>>>>> " + AuthUtil.getUser().getUserNm());
 		
 		return "manager:admin/info";
 		

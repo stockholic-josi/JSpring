@@ -32,7 +32,7 @@ public class AuthService  implements UserDetailsService {
     	
 		List<String> role = new ArrayList<String>();
 		role.add("ADMIN");
-		role.add("USR");
+		role.add("USER");
 		
 		AuthDto dto = new AuthDto();
 		dto.setUserId(userId);
