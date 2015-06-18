@@ -1,13 +1,5 @@
 package com.taxholic.web.test.service;
 
-
-import java.util.Date;
-
-
-import java.util.List;
-
-import javax.annotation.Resource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -23,16 +15,22 @@ public class TestService{
 	private CommonDao dao;
 	
 	
-	public String getSelect(){
+	public String getId(){
 		
-		String gg = dao.getString("board.selectBoardCount");
-		
-		return gg;
+		return dao.getString("auth.selectId");
 	}
 	
-//	public void schedule(){
-//		System.out.println(".........................." + new Date());
-//	}
+	@Transactional
+	public void insertRole(){
+		
+		dao.insert("auth.insertRole");
+
+//		String[] aa = null;
+//		System.out.print(aa.length);
+		
+	}
+	
+	
 //	
 //	public int insert(EncryptTest et){
 //		return this.dao.insert("front.board.roomInsert", et);

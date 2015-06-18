@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="auth">
+
+	<select id="selectId" resultType="String">
+	select name from ch_room order by seq_no limit 1
+	</select> 
+	
+	
+	<insert id="insertRole">
+		INSERT INTO ch_room (
+			name
+			,passwd
+			,date
+		) VALUES  ( 
+			'merong'
+			,'GOOD'
+			,SYSDATE() 
+		)
+
+ 	</insert>
+
+</mapper>

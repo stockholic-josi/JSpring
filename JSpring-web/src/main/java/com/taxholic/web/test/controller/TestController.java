@@ -20,6 +20,12 @@ public class TestController{
 	@Autowired
 	private TestService testService;
 	
+	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
+	@ResponseBody
+	public String login() {
+		 return "";
+	} 
+	
 	@RequestMapping(value = "/getMsg.do", method = RequestMethod.GET)
 	@ResponseBody
 	public String getMsg() {
@@ -27,11 +33,17 @@ public class TestController{
 		
 	} 
 	
-	@RequestMapping(value = "/getSelect.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/getId.do", method = RequestMethod.GET)
 	@ResponseBody
-	public String getSelect() {
-		return  testService.getSelect();
-		
+	public String getId() {
+		return  testService.getId();
+	} 
+	
+	@RequestMapping(value = "/insertRole.do", method = RequestMethod.GET)
+	@ResponseBody
+	public String insertRole() {
+		 testService.insertRole();
+		 return "";
 	} 
 		
 		

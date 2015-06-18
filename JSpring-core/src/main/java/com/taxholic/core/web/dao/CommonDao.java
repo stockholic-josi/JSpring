@@ -3,12 +3,6 @@ package com.taxholic.core.web.dao;
 
 import java.util.List;
 
-
-
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

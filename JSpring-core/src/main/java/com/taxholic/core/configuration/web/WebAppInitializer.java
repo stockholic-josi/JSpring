@@ -31,6 +31,7 @@ public class WebAppInitializer implements WebApplicationInitializer {
 		 addListener();
 		 setServletDispatcher();
 		 addServletFilter();
+		 addSecurityFilter();
     }
     
     /**
@@ -85,6 +86,7 @@ public class WebAppInitializer implements WebApplicationInitializer {
     }
 
     public void setServletDispatcher() {
+    	
         AnnotationConfigWebApplicationContext dispatcherServletContext = new AnnotationConfigWebApplicationContext();
         dispatcherServletContext.register(SpringMvcConfiguration.class);
         ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", new DispatcherServlet(dispatcherServletContext));

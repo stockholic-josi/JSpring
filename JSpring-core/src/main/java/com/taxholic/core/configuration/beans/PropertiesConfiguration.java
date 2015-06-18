@@ -13,6 +13,8 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
+import com.taxholic.core.constants.SystemConstants;
+
 
 @Configuration
 public class PropertiesConfiguration {
@@ -21,7 +23,7 @@ public class PropertiesConfiguration {
 	public static EnvironmentStringPBEConfig environmentVariableConfiguration() {
 		EnvironmentStringPBEConfig envConfig = new EnvironmentStringPBEConfig();
 		envConfig.setAlgorithm("PBEWithMD5AndDES");
-		envConfig.setPassword("TAXHOLIC");
+		envConfig.setPassword(SystemConstants.ENCRYPT_KEY);
 		return envConfig;
 	}
 
