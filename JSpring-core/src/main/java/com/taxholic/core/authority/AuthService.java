@@ -26,10 +26,6 @@ public class AuthService  implements UserDetailsService {
 
     public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException, DataAccessException {
     	
-		if (userId == null || "".equals(userId.trim()) || userId == null) {
-			return null;
-		}
-    	
 		List<String> role = new ArrayList<String>();
 		role.add("ADMIN");
 		role.add("USER");
