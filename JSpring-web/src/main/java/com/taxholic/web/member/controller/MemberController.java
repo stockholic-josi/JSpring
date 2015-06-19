@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.taxholic.core.authority.AuthUtil;
 import com.taxholic.web.test.service.TestService;
 
 @Controller
@@ -30,16 +29,12 @@ public class MemberController{
 	
 	
 	@RequestMapping(value = "login.do", method = RequestMethod.GET)
-	@ResponseBody
 	public String login() {
-		 return "";
+		 return "manager:admin/login";
 	} 
 	
 	@RequestMapping(value = "/admin/info.do", method = RequestMethod.GET)
 	public String info(Model model) {
-		
-		System.out.println(">>>>>> " + AuthUtil.getUser().getUserId());
-		System.out.println(">>>>>> " + AuthUtil.getUser().getUserNm());
 		
 		return "manager:admin/info";
 		

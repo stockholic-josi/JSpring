@@ -38,16 +38,17 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
  
 		http
+		.csrf().disable()
 		.authorizeRequests()
 		 	.antMatchers( "/login**" ).permitAll()
-			.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
-			.antMatchers("/dba/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_DBA')")
+			.antMatchers("/admin/**").access("hasRole('ROLE_ADM')")
+			.antMatchers("/dba/**").access("hasRole('ROLE_ADM') or hasRole('ROLE_DBA')")
 			.and()
 		.formLogin()
-//			.loginPage( "/login.do" )
+			.loginPage( "/login.do" )
 	        .loginProcessingUrl( "/login" )
 	        .defaultSuccessUrl( "/" )
-	        .failureUrl( "/login?err=1" )
+	        .failureUrl( "/login.do?err=1" )
 	        .usernameParameter( "userNm" )
 	        .passwordParameter( "password" )
 	        .and()

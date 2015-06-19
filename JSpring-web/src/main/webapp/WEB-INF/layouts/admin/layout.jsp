@@ -2,7 +2,7 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib uri="http://www.springframework.org/tags"	prefix="spring" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<sec:authentication var="user" property="principal.user" />
+<sec:authentication var="info" property="principal" />
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,11 +14,11 @@
 		<tiles:insertAttribute name="header" />
 		
 		<div>
-			<sec:authorize ifNotGranted="ROLE_USER">
+			<sec:authorize ifNotGranted="ROLE_USR">
 		        로그인
 		    </sec:authorize>
-		     <sec:authorize ifAnyGranted="ROLE_USER"> 
-		     	${user.userNm}(${user.userId})
+		     <sec:authorize ifAnyGranted="ROLE_USR"> 
+		     	${info.user.userNm}(${info.user.userId})
 				<a href="/logout">로그아웃</a>
 			</sec:authorize>
 		    

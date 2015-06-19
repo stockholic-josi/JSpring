@@ -4,22 +4,19 @@
 
 <mapper namespace="auth">
 
-	<select id="selectId" resultType="String">
-	select name from ch_room order by seq_no limit 1
-	</select> 
-	
-	
-	<insert id="insertRole">
-		INSERT INTO ch_room (
-			name
-			,passwd
-			,date
-		) VALUES  ( 
-			'merong'
-			,'GOOD'
-			,SYSDATE() 
-		)
+	<select id="getUserInfo" resultType="com.taxholic.core.authority.AuthDto">
+	SELECT 
+		user_id
+		,passwd AS password
+		,user_nm
+		,email
+		,receive
+	FROM auth_member 
+	WHERE user_id = #{userId} AND use_yn = #{useYn}
+	</select>
 
- 	</insert>
+	<select id="getUserAuthList" resultType="com.taxholic.core.authority.AuthDto">
+		SELECT role_cd AS role  FROM auth_member_role WHERE user_id = #{userId}
+	</select>
 
 </mapper>

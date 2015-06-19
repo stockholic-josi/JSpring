@@ -3,6 +3,7 @@ package com.taxholic.core.configuration.beans;
 
 import javax.sql.DataSource;
 
+import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -40,7 +41,7 @@ public class DBConfiguration {
 	 private @Value("${datasource.user}") String user;
 	 private @Value("${datasource.password}") String password;
 
-
+/*
     @Bean(destroyMethod = "shutdown")
     public DataSource dataSource() {
     	
@@ -64,14 +65,26 @@ public class DBConfiguration {
 
         return dataSource;
     }
-    
+  */  
+   
+    @Bean(destroyMethod = "close")
+    public BasicDataSource  sqliteSource() {
+    	
+    	BasicDataSource sqliteSource = new BasicDataSource();
+    	sqliteSource.setDriverClassName(driverClassName);
+    	sqliteSource.setUrl(url + this.getClass().getResource("/").getPath() + "/shkr.db");
+    	
+        return sqliteSource;
+        
+    }
     
 
     @Bean
     public SqlSessionFactory sqlSessionFactory() throws Exception {
     	
     	SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
-    	sqlSessionFactory.setDataSource(dataSource());
+//    	sqlSessionFactory.setDataSource(dataSource());
+    	sqlSessionFactory.setDataSource(sqliteSource());
 		PathMatchingResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver();
 		DefaultResourceLoader defaultResourceLoader = new DefaultResourceLoader();
 		sqlSessionFactory.setConfigLocation(defaultResourceLoader.getResource("classpath:config/mybatis-config.xml"));
@@ -90,7 +103,8 @@ public class DBConfiguration {
 		sqlSessionFactory.setConfigLocation(defaultResourceLoader.getResource("classpath:config/mybatis-config.xml"));
 		PathMatchingResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver();
 		sqlSessionFactory.setMapperLocations(resourcePatternResolver.getResources("classpath:mapper/**/*.xml"));
-		sqlSessionFactory.setDataSource(dataSource());
+//		sqlSessionFactory.setDataSource(dataSource());
+		sqlSessionFactory.setDataSource(sqliteSource());
 		sqlSessionFactory.setCheckInterval(1000);
 		sqlSessionFactory.setProxy();
 
@@ -103,9 +117,14 @@ public class DBConfiguration {
 		return sqlSession;
 	}
     
+//    @Bean
+//	public DataSourceTransactionManager txManager(@Qualifier("dataSource") DataSource dataSource) {
+//		return new DataSourceTransactionManager(dataSource);
+//	}
+    
     @Bean
-	public DataSourceTransactionManager txManager(@Qualifier("dataSource") DataSource dataSource) {
-		return new DataSourceTransactionManager(dataSource);
-	}
+    public DataSourceTransactionManager txManager(@Qualifier("sqliteSource") DataSource sqliteSource) {
+    	return new DataSourceTransactionManager(sqliteSource);
+    }
     
 }
