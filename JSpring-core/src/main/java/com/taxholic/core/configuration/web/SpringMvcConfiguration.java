@@ -5,21 +5,21 @@ import java.io.IOException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.context.annotation.Import;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.view.BeanNameViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
-import org.springframework.web.servlet.view.tiles3.SpringBeanPreparerFactory;
+import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesView;
 
@@ -77,6 +77,20 @@ public class SpringMvcConfiguration extends WebMvcConfigurerAdapter {
         TilesConfigurer tilesConfigurer = new TilesConfigurer();
         tilesConfigurer.setDefinitions(new String[] {"classpath:config/tiles/tiles-*.xml"});
         return tilesConfigurer;
+    }
+    
+    @Bean
+    public MappingJacksonJsonView jsonView() {
+        MappingJacksonJsonView jsonView = new MappingJacksonJsonView();
+        jsonView.setContentType("application/json;charset=UTF-8");
+        return jsonView;
+    }
+    
+    @Bean
+    public BeanNameViewResolver beanNameResolver() {
+    	BeanNameViewResolver beanNameViewResolver = new BeanNameViewResolver();
+    	beanNameViewResolver.setOrder(0);
+        return beanNameViewResolver;
     }
     
 
