@@ -301,8 +301,12 @@
 	<dependency>
 		<groupId>net.sf.ehcache</groupId>
 		<artifactId>ehcache-core</artifactId>
-		<version>2.6.9</version>
 	</dependency>
+	
+	<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+		</dependency>
  
   </dependencies>
   

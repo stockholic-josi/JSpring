@@ -20,7 +20,7 @@
     </definition>
     
 	<!-- front -->
-    <definition name="front:**" extends=".front"  template="/WEB-INF/layouts/front/ayout.jsp">
+    <definition name="front:**" extends=".front"  template="/WEB-INF/layouts/front/layout.jsp">
         <put-attribute name="header" value="/WEB-INF/layouts/front/header.jsp" />
         <put-attribute name="body" value="/WEB-INF/jsp/{1}.jsp" />
         <put-attribute name="footer" value="/WEB-INF/layouts/front/footer.jsp" />
