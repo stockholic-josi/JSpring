@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+<!-- 
+	<appender name="starflat_rest_api_log" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>/home1/irteam/apps/tomcat/logs/starflat_rest_api.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>/home1/irteam/apps/tomcat/logs/starflat_rest_api.%d{yyyy-MM-dd}.log</FileNamePattern>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%d | %logger{35} | %msg%n</Pattern>
+		</layout>
+	</appender>
+	
+	<appender name="starflat_tcp_api_log" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>/home1/irteam/apps/tomcat/logs/starflat_tcp_api.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>/home1/irteam/apps/tomcat/logs/starflat_tcp_api.%d{yyyy-MM-dd}.log</FileNamePattern>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%d | %logger{35} | %msg%n</Pattern>
+		</layout>
+	</appender>
+	
+	<appender name="starflat_rest_api_error_log" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>/home1/irteam/apps/tomcat/logs/starflat_rest_api_error_log.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>/home1/irteam/apps/tomcat/logs/starflat_rest_api_error.%d{yyyy-MM-dd}.log</FileNamePattern>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%d | %logger{35} | %msg%n</Pattern>
+		</layout>
+	</appender>
+		
+	<appender name="starflat_tcp_api_error_log" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>/home1/irteam/apps/tomcat/logs/starflat_tcp_api_error.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>/home1/irteam/apps/tomcat/logs/starflat_tcp_api_error.%d{yyyy-MM-dd}.log</FileNamePattern>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%d | %logger{35} | %msg%n</Pattern>
+		</layout>
+	</appender>
+	
+	 -->
+	 
+	<logger name="com.gargoylesoftware.htmlunit" level="ERROR" />
+	<logger name="org.apache.http" level="ERROR" />
+	 
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<!-- <pattern>%d | %logger{35} | %msg%n</pattern>-->
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	 
+	 <logger name="com.nhnent.toastcloud">
+		<level value="info"/>
+		<appender-ref ref="console" />
+	</logger>
+	
+	
+	<!-- 
+	<root>
+		<level value="INFO" />
+		<appender-ref ref="console" />
+	</root>
+	 -->
+	
+</configuration>
