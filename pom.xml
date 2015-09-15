@@ -511,6 +511,46 @@
 	          </execution>
 	        </executions>
 	      </plugin>
+	      
+	      
+	       <plugin>
+	        <artifactId>maven-resources-plugin</artifactId>
+	        <version>2.7</version>
+	        <executions>
+	          <execution>
+	            <id>copy-resources</id>
+	            <phase>validate</phase>
+	            <goals>
+	              <goal>copy-resources</goal>
+	            </goals>
+	            <configuration>
+	              <outputDirectory>${basedir}/target/site</outputDirectory>
+	              <resources>          
+	                <resource>
+	                  <directory>src/test/site</directory>
+	                  <filtering>true</filtering>
+	                </resource>
+	              </resources>              
+	            </configuration>            
+	          </execution>
+	        </executions>
+	      </plugin>
+	      
+	      <plugin>
+	        <groupId>org.apache.maven.plugins</groupId>
+	        <artifactId>maven-surefire-plugin</artifactId>
+	        <version>2.18.1</version>
+	        <configuration>
+	        <excludes>
+	            <exclude>**/Test_01_billing_이용요금조회_내가어드민인프로젝트.java</exclude>
+	          </excludes>
+	          <includes>
+	            <include>**/Test_05_*.java</include>
+	          </includes>
+	        </configuration>
+	      </plugin>
+	      
+	      
 	       -->
     </plugins>
   <!-- 
