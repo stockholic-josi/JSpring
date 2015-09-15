@@ -1,9 +1,12 @@
 package com.taxholic.core.authority;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class AuthDto {
+public class AuthDto implements Serializable{
+	
+	private static final long serialVersionUID = -1540957347729418968L;
 	
 	private String userId;
 	private String userNm;
