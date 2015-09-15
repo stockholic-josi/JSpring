@@ -2,6 +2,7 @@ package com.taxholic.core.configuration.web;
 
 import java.util.EnumSet;
 
+
 import javax.servlet.DispatcherType;
 import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
@@ -16,6 +17,7 @@ import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.multipart.support.MultipartFilter;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.util.Log4jConfigListener;
+
 
 public class WebAppInitializer implements WebApplicationInitializer {
  
@@ -79,9 +81,11 @@ public class WebAppInitializer implements WebApplicationInitializer {
      */
     public void addSpringCoreListener() {
     	
-    	servletContext.setInitParameter("log4jConfigLocation", "classpath:config/log4j.xml");
-        servletContext.addListener(new Log4jConfigListener());
-    	
+//     servletContext.setInitParameter("log4jConfigLocation", "classpath:config/log4j.xml");
+//     servletContext.addListener(new Log4jConfigListener());
+//        servletContext.setInitParameter("logbackConfigLocation", "classpath:config/logback.xml");
+//        servletContext.addListener(new LogbackConfigListener());
+//    	
         servletContext.addListener(new ContextLoaderListener(context));
     }
 

@@ -41,6 +41,9 @@
 	<profiles>
 		<profile>
 			<id>local</id>
+			<activation>
+				<activeByDefault>true</activeByDefault> 
+			</activation>
 			<properties>
 				<environment>local</environment>
 				<rp.build.warname>JSpring</rp.build.warname>
@@ -51,9 +54,6 @@
 		
 		<profile>
 			<id>dev</id>
-			<activation>
-				<activeByDefault>true</activeByDefault> 
-			</activation>
 			<properties>
 				<environment>dev</environment>
 				<rp.build.warname>JSpring</rp.build.warname>
@@ -214,11 +214,13 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>${slf4j.version}</version>
 		</dependency>
+		<!-- 
 	    <dependency>
 	       <groupId>log4j</groupId>
 	       <artifactId>log4j</artifactId>
 	       <version>${log4j.version}</version>
 	   </dependency>
+	    -->
 	   	<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-access</artifactId>
@@ -234,7 +236,7 @@
 			<artifactId>logback-classic</artifactId>
 			<version>${logback.version}</version>
 		</dependency>
-		 
+				 
 		 <!-- DB Connection Pool -->
 		<dependency>
 			<groupId>com.zaxxer</groupId>
