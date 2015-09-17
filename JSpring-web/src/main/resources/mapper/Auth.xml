@@ -18,5 +18,9 @@
 	<select id="getUserAuthList" resultType="com.taxholic.core.authority.AuthDto">
 		SELECT role_cd AS role  FROM auth_member_role WHERE user_id = #{userId}
 	</select>
+	
+	<select id="selectId" resultType="String">
+		SELECT 1
+	</select>
 
-</mapper>
+</mapper> 
