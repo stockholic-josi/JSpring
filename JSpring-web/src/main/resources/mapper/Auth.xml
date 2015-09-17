@@ -22,5 +22,26 @@
 	<select id="selectId" resultType="String">
 		SELECT 1
 	</select>
+	
+	<insert id="joinInsert">
+	INSERT INTO auth_member(
+		user_id,
+		passwd,
+		user_nm,
+		email,
+		receive,
+		use_yn,
+		reg_date
+	)VALUES(
+		#{userId},
+		#{passwd},
+		#{userNm},
+		#{email},
+		#{receive},
+		'Y',
+		/*SYSDATE()*/
+		datetime('now','localtime')
+	)
+	</insert>
 
 </mapper> 

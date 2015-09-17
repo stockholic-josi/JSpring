@@ -1,4 +1,4 @@
-package com.taxholic.configuration.beens;
+package com.taxholic.configuration.beans;
 
 import java.io.IOException;
 
@@ -14,12 +14,15 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 
 
 @Configuration
-@ComponentScan(
-	    basePackages = {"com.taxholic.configuration.beens","com.taxholic.core.web.dao"}, 
-	   // useDefaultFilters = false,
-	    includeFilters = {
-	        @ComponentScan.Filter(type = FilterType.ANNOTATION,   value = org.springframework.stereotype.Repository.class)
-	    })
+//@ComponentScan(
+//	    basePackages = {"com.taxholic.configuration.beans","com.taxholic.core.web.dao"}, 
+//	   // useDefaultFilters = false,
+//	    includeFilters = {
+//	        @ComponentScan.Filter(type = FilterType.ANNOTATION,   value = org.springframework.stereotype.Repository.class)
+//	    })
+
+@ComponentScan(basePackages = {"com.taxholic.configuration.beans","com.taxholic.web","com.taxholic.core.web.dao"}, excludeFilters = {
+		@ComponentScan.Filter(Controller.class), @ComponentScan.Filter(ControllerAdvice.class)})
 
 
 public class AnnotationConfiguration {

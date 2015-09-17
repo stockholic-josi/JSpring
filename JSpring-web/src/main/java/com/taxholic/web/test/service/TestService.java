@@ -1,11 +1,12 @@
 package com.taxholic.web.test.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.taxholic.core.web.dao.CommonDao;
+import com.taxholic.web.test.dto.EncryptDto;
 
 
 @Service
@@ -24,9 +25,9 @@ public class TestService{
 	}
 	
 	@Transactional
-	public void insertRole(){
+	public void insertUser(EncryptDto dto){
 		
-		dao.insert("auth.insertRole");
+		dao.insert("auth.joinInsert",dto);
 
 //		String[] aa = null;
 //		System.out.print(aa.length);

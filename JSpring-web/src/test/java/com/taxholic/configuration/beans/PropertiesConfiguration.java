@@ -1,4 +1,4 @@
-package com.taxholic.configuration.beens;
+package com.taxholic.configuration.beans;
 
 
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.taxholic.configuration.beens;
+package com.taxholic.configuration.beans;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public class EncryptAspect {
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	@Pointcut("execution(public * com.taxholic.core.dao..*Dao.*(..))")
+	@Pointcut("execution(public * com.taxholic.core.web.dao..*Dao.*(..))")
 	public void daoMethod() {}
 
 	@Around("daoMethod()")

@@ -3,6 +3,7 @@ package com.taxholic.web.test.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.taxholic.core.authority.AuthDto;
+import com.taxholic.web.test.dto.EncryptDto;
 import com.taxholic.web.test.service.TestService;
 
 @Controller
@@ -45,7 +47,10 @@ public class TestController{
 	@RequestMapping(value = "/insertRole.do", method = RequestMethod.GET)
 	@ResponseBody
 	public String insertRole() {
-		 testService.insertRole();
+		EncryptDto dto = new EncryptDto();
+		dto.setUserId("user2");
+		dto.setPasswd("passwd");		
+		 testService.insertUser(dto);
 		 return "";
 	} 
 
