@@ -16,8 +16,11 @@ public class TestService{
 	
 	
 	public String getId(){
-		
 		return dao.getString("auth.selectId");
+	}
+	
+	public String getId(String id){
+		return id;
 	}
 	
 	@Transactional

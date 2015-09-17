@@ -1,4 +1,5 @@
-package selenium;
+package com.taxholic.selenium;
+
 import java.io.IOException;
 
 import org.junit.Test;

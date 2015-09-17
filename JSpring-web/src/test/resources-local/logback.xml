@@ -8,10 +8,13 @@
 		</layout>
 	</appender>
 
-	<logger name="jdbc.sqlonly" level="info" additivity="false" >
+	<logger name="jdbc.sqlonly" level="debug" additivity="false" >
 		<appender-ref ref="console" />
 	</logger>
 	<logger name="org.springframework" level="info" additivity="false" >
+		<appender-ref ref="console" />
+	</logger>
+	<logger name="com.taxholic" level="debug"	additivity="false"> 
 		<appender-ref ref="console" />
 	</logger>
 

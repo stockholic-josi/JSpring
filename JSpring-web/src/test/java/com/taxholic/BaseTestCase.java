@@ -1,3 +1,5 @@
+package com.taxholic;
+
 import javax.annotation.Resource;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.junit.AfterClass;
@@ -15,23 +17,24 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.taxholic.configuration.beens.AnnotationConfiguration;
+
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes =configuration.AnnotationConfiguration.class)
+@ContextConfiguration(classes = AnnotationConfiguration.class)
 //@TransactionConfiguration(transactionManager = "txManager", defaultRollback = true)
 //@Transactional
 public class BaseTestCase extends Assert {
 	
 	protected static Logger logger = LoggerFactory.getLogger(BaseTestCase.class);
 	
-	
 	@Autowired
 	protected ApplicationContext context;
 	
 	@Autowired
 	private MessageSourceAccessor message;
-
+	
 	@AfterClass
 	public static void testDown() {
 	}
@@ -43,23 +46,10 @@ public class BaseTestCase extends Assert {
 	@Test
 	public void dummy() {
 		
-		
-//			StandardPBEStringEncryptor standardPBEStringEncryptor = new StandardPBEStringEncryptor();
-//			standardPBEStringEncryptor.setAlgorithm("PBEWithMD5AndDES");
-//			standardPBEStringEncryptor.setPassword("TAXHOLIC");
-//			String encodedPass = standardPBEStringEncryptor.encrypt("Wkwkdaus");
-//			System.out.println("Encrypted url  : "+ standardPBEStringEncryptor.encrypt("jdbc:log4jdbc:mysql://127.0.0.1/stock"));
-//			System.out.println("Encrypted userName  : "+ standardPBEStringEncryptor.encrypt("shkr"));
-//			System.out.println("Encrypted password  : "+ standardPBEStringEncryptor.encrypt("Wkwkdaus"));
-		
-		
-//			System.out.println(">>>>" + message.getMessage("board.filePath"));
-		
-//			System.out.println(">>>>>" + this.testServce.noCashe() );
-		
-//			this.testServce.insert();
-//			System.out.println(">>>>>" + this.testServce.select().size());
-		
-		
+	
+//		System.out.println(">>>>" + message.getMessage("board.filePath"));
+//		this.testServce.insert();
+//		System.out.println(">>>>>" + this.testServce.select().size()); 
+	
 	}
 }

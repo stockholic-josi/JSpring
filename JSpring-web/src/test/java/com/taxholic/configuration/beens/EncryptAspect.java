@@ -1,4 +1,4 @@
-package configuration.beans;
+package com.taxholic.configuration.beens;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;

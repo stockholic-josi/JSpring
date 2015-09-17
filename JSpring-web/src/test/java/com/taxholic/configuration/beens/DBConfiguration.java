@@ -1,4 +1,4 @@
-package configuration.beans;
+package com.taxholic.configuration.beens;
 
 
 import javax.sql.DataSource;
@@ -41,31 +41,29 @@ public class DBConfiguration {
 	 private @Value("${datasource.user}") String user;
 	 private @Value("${datasource.password}") String password;
 
-/*
-    @Bean(destroyMethod = "shutdown")
-    public DataSource dataSource() {
-    	
-        HikariConfig config = new HikariConfig();
-        
-        config.setMinimumIdle(minimumIdle);
-        config.setMaximumPoolSize(maximumPoolSize);
-        config.setConnectionTestQuery(validationQuery);
-        config.setConnectionTimeout(connectionTimeout);
-        config.setAutoCommit(isAutoCommit);
-        
-        config.addDataSourceProperty("cachePrepStmts", cachePrepStmts);
-        config.addDataSourceProperty("prepStmtCacheSize", prepStmtCacheSize);
-        config.addDataSourceProperty("useServerPrepStmts", useServerPrepStmts);
-        config.setDriverClassName(driverClassName);
-        config.setJdbcUrl(url);
-        config.setUsername(user);
-        config.setPassword(password);
-
-        HikariDataSource dataSource = new HikariDataSource(config);
-
-        return dataSource;
-    }
-  */  
+//    @Bean(destroyMethod = "shutdown")
+//    public DataSource dataSource() {
+//    	
+//        HikariConfig config = new HikariConfig();
+//        
+//        config.setMinimumIdle(minimumIdle);
+//        config.setMaximumPoolSize(maximumPoolSize);
+//        config.setConnectionTestQuery(validationQuery);
+//        config.setConnectionTimeout(connectionTimeout);
+//        config.setAutoCommit(isAutoCommit);
+//        
+//        config.addDataSourceProperty("cachePrepStmts", cachePrepStmts);
+//        config.addDataSourceProperty("prepStmtCacheSize", prepStmtCacheSize);
+//        config.addDataSourceProperty("useServerPrepStmts", useServerPrepStmts);
+//        config.setDriverClassName(driverClassName);
+//        config.setJdbcUrl(url);
+//        config.setUsername(user);
+//        config.setPassword(password);
+//
+//        HikariDataSource dataSource = new HikariDataSource(config);
+//
+//        return dataSource;
+//    }
    
     @Bean(destroyMethod = "close")
     public BasicDataSource  sqliteSource() {
@@ -94,26 +92,9 @@ public class DBConfiguration {
     }
     
     
-    @Bean
-    public SqlSessionFactory refeshSqlSessionFactory() throws Exception {
-    	
-    	RefreshableSqlSessionFactoryBean sqlSessionFactory = new RefreshableSqlSessionFactoryBean();
-    	
-		DefaultResourceLoader defaultResourceLoader = new DefaultResourceLoader();
-		sqlSessionFactory.setConfigLocation(defaultResourceLoader.getResource("classpath:config/mybatis-config.xml"));
-		PathMatchingResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver();
-		sqlSessionFactory.setMapperLocations(resourcePatternResolver.getResources("classpath:mapper/**/*.xml"));
-//		sqlSessionFactory.setDataSource(dataSource());
-		sqlSessionFactory.setDataSource(sqliteSource());
-		sqlSessionFactory.setCheckInterval(1000);
-		sqlSessionFactory.setProxy();
-
-		return sqlSessionFactory.getObject();
-    }
-    
     @Bean(destroyMethod = "clearCache")
-	public SqlSessionTemplate sqlSession(SqlSessionFactory refeshSqlSessionFactory) {
-		SqlSessionTemplate sqlSession = new SqlSessionTemplate(refeshSqlSessionFactory);
+	public SqlSessionTemplate sqlSession(SqlSessionFactory sqlSessionFactory) {
+		SqlSessionTemplate sqlSession = new SqlSessionTemplate(sqlSessionFactory);
 		return sqlSession;
 	}
     
@@ -126,5 +107,7 @@ public class DBConfiguration {
     public DataSourceTransactionManager txManager(@Qualifier("sqliteSource") DataSource sqliteSource) {
     	return new DataSourceTransactionManager(sqliteSource);
     }
+    
+    
     
 }
