@@ -83,9 +83,6 @@ public class WebAppInitializer implements WebApplicationInitializer {
     	
 //     servletContext.setInitParameter("log4jConfigLocation", "classpath:config/log4j.xml");
 //     servletContext.addListener(new Log4jConfigListener());
-//        servletContext.setInitParameter("logbackConfigLocation", "classpath:config/logback.xml");
-//        servletContext.addListener(new LogbackConfigListener());
-//    	
         servletContext.addListener(new ContextLoaderListener(context));
     }
 
@@ -95,7 +92,7 @@ public class WebAppInitializer implements WebApplicationInitializer {
         dispatcherServletContext.register(SpringMvcConfiguration.class);
         ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", new DispatcherServlet(dispatcherServletContext));
         dispatcher.setLoadOnStartup(1);
-        dispatcher.addMapping("/");
+        dispatcher.addMapping("*.do");
 
         context.refresh();
     }
