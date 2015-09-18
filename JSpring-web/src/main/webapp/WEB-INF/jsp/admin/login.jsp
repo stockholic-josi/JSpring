@@ -1,8 +1,31 @@
-<form name='frm' action='/login' method='POST'>
- <table align="center" style="margin-top:300px">
-    <tr><td>User:</td><td><input type='text' name='userNm' value="stock"></td></tr>
-    <tr><td>Password:</td><td><input type='password' name='password'  value="1234" /></td></tr>
-    <tr><td><input type='checkbox' name='remember-me'/></td><td>Remember</td></tr>
-    <tr><td colspan='2'><input name="submit" type="submit" value="Login"/></td></tr>
-  </table>
-</form>
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<div class="row">
+     <div class="col-md-4 col-md-offset-4">
+         <div class="login-panel panel panel-default">
+             <div class="panel-heading">
+                 <h3 class="panel-title">Login</h3>
+             </div>
+             <div class="panel-body">
+                 <form name='frm' action='/login' method='POST'>
+                     <fieldset>
+                         <div class="form-group">
+                             <input class="form-control" placeholder="아이디" name="userNm"  autofocus>
+                         </div>
+                         <div class="form-group">
+                             <input class="form-control" placeholder="패스워드" name="password" type="password">
+                         </div>
+                         <div class="checkbox">
+                             <label>
+                                 <input type='checkbox' name='remember-me'/>로그인 유지
+                             </label>
+                         </div>
+                         <!-- Change this to a button or input when using this as a form -->
+                         <input name="submit" type="submit" value="Login" class="btn btn-lg btn-success btn-block"/>
+                     </fieldset>
+                 </form>
+             </div>
+             
+         </div>
+         stock / 1234
+     </div>
+ </div>

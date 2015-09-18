@@ -10,7 +10,7 @@
     </definition>
 	
 	<!-- none -->
-    <definition name="none:**" extends=".front" template="/WEB-INF/layouts/none/layout.jsp" >
+    <definition name="none:**"  template="/WEB-INF/layouts/none/layout.jsp" >
         <put-attribute name="body" value="/WEB-INF/jsp/{1}.jsp" />
     </definition>
     

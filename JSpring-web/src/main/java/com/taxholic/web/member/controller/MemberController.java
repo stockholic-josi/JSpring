@@ -30,7 +30,7 @@ public class MemberController{
 	
 	@RequestMapping(value = "login.do", method = RequestMethod.GET)
 	public String login() {
-		 return "manager:admin/login";
+		 return "none:admin/login";
 	} 
 	
 	@RequestMapping(value = "/admin/info.do", method = RequestMethod.GET)
