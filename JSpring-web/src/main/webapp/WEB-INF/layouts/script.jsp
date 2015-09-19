@@ -1,6 +1,9 @@
   <!-- jQuery -->
  <script src="/js/jquery-1.10.2.min.js"></script>
  
+   <!-- Angular -->
+ <script src="/js/angular.min.js"></script>
+ 
  <!-- Bootstrap Core JavaScript -->
  <script src="/assets/bootstrap/dist/js/bootstrap.min.js"></script>
  
