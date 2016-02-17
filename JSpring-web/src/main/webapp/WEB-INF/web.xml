@@ -8,11 +8,19 @@
 	<session-config>  
         <session-timeout>20</session-timeout>  
     </session-config>  
+    
+      
+  <!-- Custom Tag Library -->
+  <jsp-config>
+	<taglib>
+		<taglib-uri>http://www.taxholic.kr/tags</taglib-uri>
+		<taglib-location>/WEB-INF/tld/tx.tld</taglib-location>
+	</taglib>
+  </jsp-config>  
 	
 	
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
-		<welcome-file>index.do</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
 	
 	<!-- 

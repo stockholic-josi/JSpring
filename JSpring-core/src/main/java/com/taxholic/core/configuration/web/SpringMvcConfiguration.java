@@ -23,6 +23,8 @@ import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesView;
 
+import com.taxholic.core.util.ExcelView;
+
 @Configuration
 @EnableWebMvc
 //@Import({TilesConfiguration.class, PropertiesConfiguration.class, MessageConfiguration.class, HttpClientConfiguration.class})
@@ -91,6 +93,11 @@ public class SpringMvcConfiguration extends WebMvcConfigurerAdapter {
     	BeanNameViewResolver beanNameViewResolver = new BeanNameViewResolver();
     	beanNameViewResolver.setOrder(0);
         return beanNameViewResolver;
+    }
+
+    @Bean
+    public ExcelView excelView() {
+    	return new ExcelView();
     }
     
 

@@ -59,6 +59,15 @@
                             <a href="/admin/board/list.do"><i class="fa fa-edit fa-fw"></i> 게시판</a>
                         </li>
                         <li>
+                            <a href="/admin/board/list.do"><i class="fa fa-edit fa-fw"></i> 유틸</a>
+                              <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="/admin/ui/form.do">UI Components</a>
+                                    <a href="/admin/ui/form.do">FileUpload</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> 차트<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>

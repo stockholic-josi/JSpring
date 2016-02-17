@@ -1,33 +1,83 @@
 package com.taxholic.core.util;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class DateUtil {
 	
-	public static Calendar cal = Calendar.getInstance();
-	
-	/***
-	 * 현재 년도 <p>
+	/**
+	 * 현재 년
 	 * @return int
 	 */
 	public static int getYear()	 {
+		Calendar cal = Calendar.getInstance();
 		return cal.get(Calendar.YEAR);
 	 }
-
+	
 	/***
-	 * 현재 월 <p>
+	 * 현재 월
 	 * @return int
 	 */
 	public static int getMonth() {
+		Calendar cal = Calendar.getInstance();
 		return cal.get(Calendar.MONTH)+1;
 	}
-
+	
 	/***
 	 * 현재 일 <p>
 	 * @return int
 	 */
 	public static int getDay() {
+		Calendar cal = Calendar.getInstance();
 		return cal.get(Calendar.DATE);
+	}
+	
+	/**
+	 * 현재 날짜
+	 * @return String
+	 */
+	public static String getDate() {
+		Date date = new Date();
+		 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		 return df.format(date);
+	}
+	
+	/**
+	 * 현재 날짜 
+	 * @param format - yyyy-MM-dd hh:mm:ss
+	 * @return String
+	 */
+	public static String getDate( String format){
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat(format);
+		return  sdf.format(date);
+	}
+	
+	/**
+	 * 날짜 변환 
+	 * @param date
+	 * @param format - yyyy-MM-dd hh:mm:ss
+	 * @return String
+	 */
+	public static String getDate(Date date, String format){
+		SimpleDateFormat sdf = new SimpleDateFormat(format);
+		return  sdf.format(date);
+	}
+	
+	/**
+	 * n일 전/후 날짜 변환
+	 * @param ymd - 대상날짜(yyyy-MM-dd)
+	 * @param n  - n일 전/후 날자
+	 * @return String
+	 * @throws ParseException
+	 */
+	public static String getDate (String ymd, int n) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar cal = Calendar.getInstance();    
+		cal.setTime(sdf.parse(ymd));
+	    cal.add ( Calendar.DAY_OF_MONTH, n );
+	    return getDate(cal.getTime(), "yyyy-MM-dd");
 	}
 	
 	/***
@@ -35,37 +85,17 @@ public class DateUtil {
 	 * @return String
 	 */
 	public static String getWeek() {
+		Calendar cal = Calendar.getInstance();
 		String [] week = {"","일","월","화","수","목","금","토"};
 		return week[cal.get(Calendar.DAY_OF_WEEK)]; 
 	}	
-	
-	/***
-	 * 날짜 가져오기 ex) 오늘부 터 7일후 getDate(0,0,7) <p>
-	 * @param Y <br>
-	 * @param M <br>
-	 * @param D
-	 * @return int
-	 */
-	public static int[] getDate(int Y, int M, int D) {
-		
-		int [] arrDate = new int[3];	
-		
-		if(Y != 0) cal.add(Calendar.YEAR,Y); 
-		if(M != 0) cal.add(Calendar.MONTH,M); 
-		if(D != 0) cal.add(Calendar.DATE,D); 
-		
-		arrDate[0] = cal.get(Calendar.YEAR);
-		arrDate[1] = cal.get(Calendar.MONTH)+1;
-		arrDate[2] = cal.get(Calendar.DATE);
-		
-		return arrDate;
-	}
 	
 	/***
 	 * 현재달 주 (1주, 2주 ...)
 	 * @return int
 	 */
 	public static int getCurrentWeek(){
+		Calendar cal = Calendar.getInstance();
 		int result = cal.get(Calendar.WEEK_OF_MONTH) ;
 		return result;
 	} 
@@ -86,7 +116,7 @@ public class DateUtil {
 	 * 해당년월의 첫번째 날짜의 요일(1:SUNDAY, 2:MONDAY...)
 	 * @param nYear
 	 * @param nMonth
-	 * @return
+	 * @return int
 	 */
 	public static int getFirstWeekday(int nYear, int nMonth){
 		GregorianCalendar cld = new GregorianCalendar (nYear, nMonth - 1, 1);
@@ -98,7 +128,7 @@ public class DateUtil {
 	 * 해당년월의 주의 개수
 	 * @param nFristWeekday : 그 달의 첫째날의 요일
 	 * @param nToDay : 그 달의 날짜 수
-	 * @return
+	 * @return int
 	 */
 	public static int getWeekCount(int nFristWeekday, int nToDay){
 		int nCountDay = nFristWeekday + nToDay - 1;
@@ -111,20 +141,16 @@ public class DateUtil {
 
 	
 	/**
-	 * 셀렉트 년도 날짜 생성 ex) getYear(2007)
-	 * @param sY : 년도
-	 * @return 
+	 * 셀렉트 년도 날짜 생성 
+	 * @return String
 	 */
-	public static String getSelYear(int sY){
-
+	public static String getSelYear(int sel){
 		StringBuffer dataList = new StringBuffer();
+		int year = getYear();
 		
-		for(int i = sY - 4; i <= sY + 4; i++){
-			if(i == sY){
-				dataList.append("<option value='" + i + "' selected>" + i + "</option>");
-			}else{
-				dataList.append("<option value='" + i + "'>" + i + "</option>");
-			}
+		for(int i = 0; i <  7; i++){
+			String selected = (year - i ==  sel) ? "selected" : "";
+			dataList.append("<option value='" + (year -i) + "' " + selected + ">" + (year -i) + "</option>");
 		}
 
 		return dataList.toString();
@@ -133,7 +159,7 @@ public class DateUtil {
 	/**
 	 *  셀렉트 월  날짜 생성 ex) getMonth(3);
 	 * @param m : 현재 월
-	 * @return
+	 * @return String
 	 */
 	public static String getSelMonth(int sM){
 
@@ -154,7 +180,7 @@ public class DateUtil {
 	/***
 	 * 셀렉트 일 날짜 생성 ex(getDay(25))
 	 * @param d : 현재 일
-	 * @return
+	 * @return String
 	 */
 	public static String getSelDay(int sY, int sM, int sD){
 		StringBuffer dataList = new StringBuffer();

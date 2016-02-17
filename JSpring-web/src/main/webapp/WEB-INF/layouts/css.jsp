@@ -9,3 +9,6 @@
 
 <!-- Custom Fonts -->
 <link href="/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+<!-- DatePicker -->
+<link href="/assets/datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">

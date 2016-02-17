@@ -28,11 +28,9 @@
 		<mybatis.version>3.2.2</mybatis.version>
 		<mybatis-spring.version>1.2.0</mybatis-spring.version>
 		<aspectj.version>1.8.4</aspectj.version>
-		<cxf.version>3.0.4</cxf.version>
+		
 		<maven.encoding>UTF-8</maven.encoding>
-		
 		<outputDirectory>${project.basedir}/src/main/webapp/WEB-INF</outputDirectory>
-		
 		<project.build.sourceEncoding>${maven.encoding}</project.build.sourceEncoding>
     	<project.reporting.outputEncoding>${maven.encoding}</project.reporting.outputEncoding>
 		
@@ -383,7 +381,7 @@
 	    <dependency>
 	        <groupId>javax.servlet</groupId>
 	        <artifactId>javax.servlet-api</artifactId>
-	        <version>3.0.1</version>
+	        <version>3.1.0</version>
 	    </dependency>
 	    <dependency>
 			<groupId>taglibs</groupId>
@@ -574,7 +572,6 @@
 	          </includes>
 	        </configuration>
 	      </plugin>
-	      
 	      
 	       -->
     </plugins>
