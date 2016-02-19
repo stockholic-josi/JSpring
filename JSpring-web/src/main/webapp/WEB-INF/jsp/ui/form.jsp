@@ -15,6 +15,19 @@ $(document).ready(function () {
 	 $("#number").mask("0000000000");
 	 $('#money').mask("#,##0,000", {reverse: true});
 });
+
+
+function openWin(){
+	
+	com.popup({
+		url : "",
+		title : "후후",
+		width : 300,
+		height : 400,
+		scrollbars : "no"
+	})
+}
+
  </script>
  
  
@@ -37,11 +50,11 @@ $(document).ready(function () {
 	
 	
 	<h5 class="page-header"><span class="glyphicon glyphicon-th-large"></span> 윈도우 팝업</h5>
-	<button type="button" class="btn btn-default">가운데</button>
+	<button type="button" class="btn btn-default" onClick="openWin()">가운데</button>
 	<button type="button" class="btn btn-default">삑딱하게</button>
 	
 	<h5 class="page-header"><span class="glyphicon glyphicon-th-large"></span> 레이어 팝업</h5>
-	<button type="button" class="btn btn-default" onClick="BootstrapDialog.alert('Hi Apple!');">일반</button>
+	<button type="button" class="btn btn-default">일반</button>
 	<button type="button" class="btn btn-default">Iframe</button>
 	
 	
