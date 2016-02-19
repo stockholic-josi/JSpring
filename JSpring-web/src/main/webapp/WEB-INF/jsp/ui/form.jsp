@@ -18,13 +18,23 @@ $(document).ready(function () {
 
 
 function openWin(){
-	
 	com.popup({
-		url : "",
-		title : "후후",
-		width : 300,
+		url :"",
+		title : "가운데",
+		width : 600,
+		height : 400
+	})
+}
+
+
+function openWin2(){
+	com.popup({
+		url :"",
+		title : "삑딱하게",
+		width : 600,
 		height : 400,
-		scrollbars : "no"
+		left : 100,
+		top : -100
 	})
 }
 
@@ -51,7 +61,7 @@ function openWin(){
 	
 	<h5 class="page-header"><span class="glyphicon glyphicon-th-large"></span> 윈도우 팝업</h5>
 	<button type="button" class="btn btn-default" onClick="openWin()">가운데</button>
-	<button type="button" class="btn btn-default">삑딱하게</button>
+	<button type="button" class="btn btn-default" onClick="openWin2()">삑딱하게</button>
 	
 	<h5 class="page-header"><span class="glyphicon glyphicon-th-large"></span> 레이어 팝업</h5>
 	<button type="button" class="btn btn-default">일반</button>

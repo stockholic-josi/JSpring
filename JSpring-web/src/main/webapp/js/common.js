@@ -38,19 +38,8 @@ var com = {
 		if( options.left != undefined ) left = left +  options.left;
 		if( options.top != undefined ) top = top +  options.top; 
 		
-		window.open(options.url, options.title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=' + options.scroll + ', width='+options.width+', height='+options.height+', top='+top+', left='+left);
-	},
-
-	/**
-	 * 우편번호 zip1 zip2 addr1 아이디 찾아들어감
-	 */
-	zipCode : function(){
-		this.popup({
-			url : "/common/zipCode.do",
-			title : "우편번호검색",
-			width : 450,
-			height :500
-		});
+		var winObj = window.open(options.url, options.title.replace(/ /g,'_'), 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=' + options.scroll + ', width='+options.width+', height='+options.height+', top='+top+', left='+left);
+		winObj.document.title = options.title
 	},
 
 	// 화면프린트

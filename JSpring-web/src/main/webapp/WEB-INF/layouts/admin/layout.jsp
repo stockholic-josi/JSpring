@@ -53,15 +53,17 @@
                     <ul class="nav" id="side-menu">
  
                         <li>
-                            <a href="/admin/main.do"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="/admin/main.do"><i class="fa fa-dashboard fa-fw"></i> Dashboard<span class="fa arrow"></span></a>
                         </li>
                         <li>
-                            <a href="/admin/board/list.do"><i class="fa fa-edit fa-fw"></i> 게시판</a>
+                            <a href="/admin/board/list.do"><i class="fa fa-edit fa-fw"></i> 게시판<span class="fa arrow"></span></a>
                         </li>
                         <li>
-                            <a href="/admin/board/list.do"><i class="fa fa-edit fa-fw"></i> 유틸</a>
+                            <a href="/admin/board/list.do"><i class="fa fa-edit fa-fw"></i> 유틸<span class="fa arrow"></span></a>
                               <ul class="nav nav-second-level">
                                 <li>
+                                    <a href="/admin/ui/form.do">Tree</a>
+                                    <a href="/admin/ui/form.do">Grid</a>
                                     <a href="/admin/ui/form.do">UI Components</a>
                                     <a href="/admin/ui/form.do">FileUpload</a>
                                 </li>
