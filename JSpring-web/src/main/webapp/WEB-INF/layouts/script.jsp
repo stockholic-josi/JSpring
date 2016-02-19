@@ -6,6 +6,8 @@
  
  <!-- Bootstrap Core JavaScript -->
  <script src="/assets/bootstrap/dist/js/bootstrap.min.js"></script>
+ <script src="/assets/bootstrap/js/modal.js"></script>
+ <script src="/assets/bootstrap/js/popover.js"></script>
  
  <!-- Metis Menu Plugin JavaScript -->
  <script src="/assets/metisMenu/dist/metisMenu.min.js"></script>
