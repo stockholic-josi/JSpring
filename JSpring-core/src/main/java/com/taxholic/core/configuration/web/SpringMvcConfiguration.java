@@ -56,17 +56,6 @@ public class SpringMvcConfiguration extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public ViewResolver viewResolver() {
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setViewClass(JstlView.class);
-        resolver.setPrefix("/WEB-INF/jsp/");
-        resolver.setSuffix(".jsp");
-        resolver.setOrder(2);
-        return resolver;
-    }
-   
- 
-    @Bean
     public UrlBasedViewResolver tilesViewResolver() {
         UrlBasedViewResolver resolver = new UrlBasedViewResolver();
         resolver.setViewClass(TilesView.class);
@@ -79,6 +68,15 @@ public class SpringMvcConfiguration extends WebMvcConfigurerAdapter {
         TilesConfigurer tilesConfigurer = new TilesConfigurer();
         tilesConfigurer.setDefinitions(new String[] {"classpath:config/tiles/tiles-*.xml"});
         return tilesConfigurer;
+    }
+    
+    @Bean
+    public ViewResolver viewResolver() {
+        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+        resolver.setViewClass(JstlView.class);
+        resolver.setPrefix("/WEB-INF/jsp/");
+        resolver.setSuffix(".jsp");
+        return resolver;
     }
     
     @Bean
