@@ -1,6 +1,7 @@
 package com.taxholic.core.configuration.web;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -9,6 +10,7 @@ import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.View;
@@ -23,6 +25,7 @@ import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesView;
 
+import com.taxholic.core.authority.UserHandlerMethodArgumentResolver;
 import com.taxholic.core.util.ExcelView;
 
 @Configuration
@@ -33,6 +36,28 @@ import com.taxholic.core.util.ExcelView;
 												  }, useDefaultFilters = false)
 public class SpringMvcConfiguration extends WebMvcConfigurerAdapter {
 	
+	/**
+	 * User argumentResolvers
+	 */
+	@Override
+	 public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+		argumentResolvers.add(userHandlerMethodArgumentResolver());
+	 }
+	
+	/**
+	 * argument를 이용한 로그인 사용자 정보
+	 * @return
+	 */
+	 @Bean
+	 public UserHandlerMethodArgumentResolver userHandlerMethodArgumentResolver() {
+		 return new UserHandlerMethodArgumentResolver();
+	 }
+	
+	/**
+	 * properties 
+	 * @return
+	 * @throws IOException
+	 */
 	@Bean
 	public ReloadableResourceBundleMessageSource messageSource() throws IOException {
 		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
@@ -42,11 +67,20 @@ public class SpringMvcConfiguration extends WebMvcConfigurerAdapter {
 		return messageSource;
 	}
 
+	/**
+	 * Properties 
+	 * @return
+	 * @throws IOException
+	 */
 	@Bean
 	public MessageSourceAccessor messageSourceAccessor() throws IOException {
 		return new MessageSourceAccessor(messageSource());
 	}
 	
+	/**
+	 * Max FileSize
+	 * @return
+	 */
     @Bean
     public MultipartResolver multipartResolver() {
     	CommonsMultipartResolver resolver = new CommonsMultipartResolver();
@@ -55,6 +89,10 @@ public class SpringMvcConfiguration extends WebMvcConfigurerAdapter {
 	    return resolver;
     }
 
+    /**
+     * Tiles View
+     * @return
+     */
     @Bean
     public UrlBasedViewResolver tilesViewResolver() {
         UrlBasedViewResolver resolver = new UrlBasedViewResolver();
@@ -63,6 +101,10 @@ public class SpringMvcConfiguration extends WebMvcConfigurerAdapter {
         return resolver;
     }
  
+    /**
+     * Tiles View
+     * @return
+     */
     @Bean
     public TilesConfigurer tilesConfigurer() {
         TilesConfigurer tilesConfigurer = new TilesConfigurer();
@@ -70,6 +112,10 @@ public class SpringMvcConfiguration extends WebMvcConfigurerAdapter {
         return tilesConfigurer;
     }
     
+    /**
+     * JSP View
+     * @return
+     */
     @Bean
     public ViewResolver viewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
@@ -79,6 +125,10 @@ public class SpringMvcConfiguration extends WebMvcConfigurerAdapter {
         return resolver;
     }
     
+    /**
+     * JSON View
+     * @return
+     */
     @Bean
     public MappingJacksonJsonView jsonView() {
         MappingJacksonJsonView jsonView = new MappingJacksonJsonView();
@@ -93,6 +143,10 @@ public class SpringMvcConfiguration extends WebMvcConfigurerAdapter {
         return beanNameViewResolver;
     }
 
+    /**
+     * Excel View
+     * @return
+     */
     @Bean
     public ExcelView excelView() {
     	return new ExcelView();

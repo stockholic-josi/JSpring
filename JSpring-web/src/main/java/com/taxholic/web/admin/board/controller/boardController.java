@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.taxholic.core.authority.AuthDto;
 import com.taxholic.web.admin.board.dto.Board;
 import com.taxholic.web.admin.board.service.BoaardService;
 
@@ -23,7 +24,11 @@ public class boardController{
 	BoaardService boardService;
 	
 	@RequestMapping(value = "/list.do")
-	public String list() {
+	public String list(AuthDto user) {
+		
+		System.out.println(">>>>>>>>>>>>>>>>>>" + user);
+		System.out.println(">>>>>>>>>>>>>>>>>>" + user.getUserNm());
+		
 		return "manager:admin/board/boardList";
 	} 
 	
