@@ -4,6 +4,8 @@ package com.taxholic.web.admin.board.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,7 @@ import com.taxholic.web.admin.board.service.BoaardService;
 @RequestMapping("/admin/board")
 public class boardController{
 	
+	Logger logger = LoggerFactory.getLogger(getClass());
 	
 	@Autowired
 	BoaardService boardService;
@@ -26,8 +29,9 @@ public class boardController{
 	@RequestMapping(value = "/list.do")
 	public String list(AuthDto user) {
 		
-		System.out.println(">>>>>>>>>>>>>>>>>>" + user);
-		System.out.println(">>>>>>>>>>>>>>>>>>" + user.getUserNm());
+		
+		logger.debug("user : " + user);
+		logger.debug("name : " + user.getUserNm());
 		
 		return "manager:admin/board/boardList";
 	} 

@@ -15,7 +15,10 @@
 	<logger name="org.springframework" level="info" additivity="false" >
 		<appender-ref ref="console" />
 	</logger>
-	<logger name="com.taxholic.core" level="info"	additivity="false"> 
+	<logger name="com.taxholic.core" level="info" additivity="false"> 
+		<appender-ref ref="console" />
+	</logger>
+	<logger name="com.taxholic" level="debug" additivity="false"> 
 		<appender-ref ref="console" />
 	</logger>
 

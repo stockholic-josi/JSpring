@@ -59,7 +59,7 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 			.invalidateHttpSession( true )
 			.and()
 		.rememberMe()
-			.tokenValiditySeconds(864000)
+			.tokenValiditySeconds(1209600)		//2주
 			.and()
 		.sessionManagement()			//첫번째 로그인 사용자는 로그아웃, 두번째 사용자 로그인 session-registry-alias : 접속자 정보보기
 			.maximumSessions(1)
