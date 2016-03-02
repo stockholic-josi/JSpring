@@ -243,19 +243,12 @@
 				$("body").append(div);
 			},
 			
-			//우클릭 시 메뉴 div 삭제 33333
+			//우클릭 시 메뉴 div 삭제 22222222
 			removeMenu : function(){
 				$("#rMenu").remove();
 			}
-			
 		};
 	
-	window.zgTree = zgTree;		//전역변수 선언  졸라 삽질
-	
-	
+	window.zgTree = zgTree;		//전역변수 선언   
 	
 }(jQuery));
-
-
-
-
