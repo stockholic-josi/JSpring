@@ -232,6 +232,15 @@
 			}
 			
 		};
-	window.zgTree = zgTree;		//전역변수 선언
+	
+	for(var i=0;i<3;i++){
+		console.log(1);
+		
+	}
+	var a = 3;
+	if(a == 3){}
+	window.zgTree = zgTree;		//전역변수 선언 dfasrg geggegr
 }(jQuery));
 
+
+////ergehrgnerjglejrgkljeroigjw;ergmj;serjg;
