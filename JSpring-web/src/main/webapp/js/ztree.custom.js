@@ -1,4 +1,4 @@
-	var zNodes = [
+﻿	var zNodes = [
 	{
 		id : 1
 		,pId : 0
@@ -66,12 +66,12 @@
 	$.fn.makeTree =  function(options) {
 		var defaultSet ={
 			view : {
-				dblClickExpand: false
-				,selectedMulti : false
+				selectedMulti : false		//멀티 select 막기
 			},
 			edit : {
 				enable : false
-				/*//'이름 바꾸기', '삭제' 아이콘 보이기 / 숨기기	*/
+				
+				/* '이름 바꾸기', '삭제' 아이콘 보이기 / 숨기기	*/
 				,showRenameBtn : false
 				,showRemoveBtn : false
 			},
@@ -88,8 +88,11 @@
 		};
 		$.extend(defaultSet,options.setting);
 		elementId = $(this);
+		
+		// 트리 작성
 		$.fn.zTree.init(elementId,defaultSet, options.data);
 		
+		//가져오는  노드의 마지막 ID 값 가져오기
 		 var max;
 			for(var i =0; options.data.length-1 > i ; i++){
 				if(options.data[i].id > options.data[i+1].id){
@@ -106,6 +109,7 @@
 			newCount : 1,
 			rMenu : "",
 			
+			//우클릭시 메뉴 div  - show
 			showRMenu : function(type, x, y) {
 				rMenu = $("#rMenu");
 				$("#rMenu ul").show();
@@ -119,22 +123,25 @@
 				$("body").bind("mousedown", this.onBodyMouseDown);
 			},
 			
+			//메뉴 div - hidden 
 			hideRMenu: function() {
 				if (rMenu) rMenu.css({"visibility": "hidden"});
 				$("body").unbind("mousedown", this.onBodyMouseDown);
 			},
 			
+			//메뉴 div  - hidden
 			onBodyMouseDown: function (event){
 				if (!(event.target.id == "rMenu" || $(event.target).parents("#rMenu").length>0)) {
 					rMenu.css({"visibility" : "hidden"});
 				}
 			},
 			
+			//노드 추가
 			addTreeNode : function() {
-				this.hideRMenu();
-				var getNode= zTree.getSelectedNodes()[0];
+				this.hideRMenu();			//메뉴 div  - hidden
+				var getNode= zTree.getSelectedNodes()[0];		//선택한 노드 정보 가져오기
 				var pId;
-				if(!getNode){		//모든 node가 없을 경우
+				if(!getNode){		//root가 하나도 없을 경우
 					pId = null;
 				}else{
 					pId = getNode.pId;
@@ -148,21 +155,26 @@
 				//console.log(zTree.getNodes());
 			},
 			
+			//노드 삭제
 			removeTreeNode : function () {
-				this.hideRMenu();
-				var nodes = zTree.getSelectedNodes();
+				this.hideRMenu();		//메뉴 div  - hidden
+				var nodes = zTree.getSelectedNodes();		//선택한 노드 정보 가져오기
 				if (nodes && nodes.length>0) {
+					
+					//부모노드 삭제
 					if (nodes[0].children && nodes[0].children.length > 0) {
 						var msg = "이 부모 노드를 삭제시 하위 노드도 삭제 됩니다.";
 						if (confirm(msg)==true){
-							zTree.removeNode(nodes[0]);
+							zTree.removeNode(nodes[0]);		//노드 삭제
 						}
+					//자식노드 삭제			
 					} else {
-						zTree.removeNode(nodes[0]);
+						zTree.removeNode(nodes[0]);		//노드 삭제
 					}
 				}
 			},
 			
+			//전체트리에서 Json값  가져오기
 			getJsonData : function (data) {
 				for ( var obj in data) {
 					if (typeof data[obj] == "object") {
@@ -172,6 +184,7 @@
 				}
 			},
 			
+			//필요한 키만 가져오기
 			setJsonData : function (obj) {
 				var jsonData = {};
 				for ( var o in obj) {
@@ -184,11 +197,12 @@
 				}
 			},
 			
-			ajaxCall : function(url){
+			//ajax 호출 - tree  데이터 저장
+			treeSave : function(url){
 				jsonObj = [];		//초기화
-				this.getJsonData(zTree.getNodes());
-				var jsonStr = JSON.stringify(jsonObj);
-				console.log(jsonStr);
+				this.getJsonData(zTree.getNodes());		//전체트리에서 Json값  가져오기
+				var jsonStr = JSON.stringify(jsonObj);	//object to String
+				//console.log(jsonStr);
 				$.ajax({
 					url : url.url
 			        , method : "post"
@@ -205,6 +219,7 @@
 				});
 			},
 			
+			//tree 수정 가능 여부 변경
 			setEdit : function(bool){
 				zTree.setEditable(bool);
 				if(bool){
@@ -214,6 +229,7 @@
 				}
 			},
 			
+			//우클릭 시 메뉴 div 작성
 			createMenu : function(){
 				var div = "";
 				div += "<div id = 'rMenu'>";
@@ -227,20 +243,9 @@
 				$("body").append(div);
 			},
 			
+			//우클릭 시 메뉴 div 삭제 22222222
 			removeMenu : function(){
 				$("#rMenu").remove();
 			}
-			
 		};
-	
-	for(var i=0;i<3;i++){
-		console.log(1);
-		
-	}
-	var a = 3;
-	if(a == 3){}
-	window.zgTree = zgTree;		//전역변수 선언 dfasrg geggegr
 }(jQuery));
-
-
-////ergehrgnerjglejrgkljeroigjw;er
