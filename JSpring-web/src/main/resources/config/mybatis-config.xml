@@ -11,6 +11,7 @@
 		<setting name="lazyLoadingEnabled" value="false" />
 		<setting name="defaultStatementTimeout" value="200" />
 		<setting name="mapUnderscoreToCamelCase" value="true" />
+		<setting name="jdbcTypeForNull" value="NULL"/>
 	</settings>
 	 
 	 <!-- 
