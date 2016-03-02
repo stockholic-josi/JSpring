@@ -10,7 +10,7 @@
 			callback : {
 				//==============우클릭================
 				onRightClick:  function (event, treeId, treeNode) {
-					if(!edit){	//편집불가
+					if(!edit){	//tree 수정 가능
 						if (!treeNode && event.target.tagName.toLowerCase() != "button" && $(event.target).parents("a").length == 0) {
 							zTree.cancelSelectedNode();
 							zgTree.showRMenu("root", event.clientX, event.clientY);
@@ -41,14 +41,14 @@
 		//======================================save========================================
 		function save() {
 			var url = "/zTree/saveTree.do";
-			zgTree.ajaxCall({
+			zgTree.treeSave({
 				url : url
 			});
 		}
 		
 		var edit = false ;
 		function  editAble(){
-			zgTree.setEdit(edit);		//tree 수정 가능 여부
+			zgTree.setEdit(edit);		//tree 수정 가능 여부 변경
 			$("#editAble").val("편집모드 : "+edit);
 			if(edit){
 				edit = false;
