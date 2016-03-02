@@ -250,7 +250,12 @@
 			
 		};
 	
-	window.zgTree = zgTree;		//전역변수 선언  5555555555555555
-	//diff Testtttttttttt
-	//diffffffffffffft
+	window.zgTree = zgTree;		//전역변수 선언
+	
+	
+	
 }(jQuery));
+
+
+
+
