@@ -250,7 +250,7 @@
 			
 		};
 	
-	window.zgTree = zgTree;		//전역변수 선언
+	window.zgTree = zgTree;		//전역변수 선언 !!!!!!!!!!
 	
 	
 	
