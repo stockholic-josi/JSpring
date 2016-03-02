@@ -242,13 +242,11 @@
 				
 				$("body").append(div);
 			},
-			
 			//우클릭 시 메뉴 div 삭제
 			removeMenu : function(){
 				$("#rMenu").remove();
 			}
 		};
-	//!!!!!!!!!!!
-	window.zgTree = zgTree;		//전역변수 선언 !!!!!!!!!!!!!!!!!!!!!   
+	window.zgTree = zgTree;		//전역변수 선언 ========
 	
 }(jQuery));
