@@ -41,7 +41,8 @@ public class DBConfiguration {
 	 private @Value("${datasource.user}") String user;
 	 private @Value("${datasource.password}") String password;
 
-/*
+	 /*
+	 //db
     @Bean(destroyMethod = "shutdown")
     public DataSource dataSource() {
     	
@@ -64,9 +65,10 @@ public class DBConfiguration {
         HikariDataSource dataSource = new HikariDataSource(config);
 
         return dataSource;
-    }
-  */  
+    }*/
+  
    
+    //sqlite
     @Bean(destroyMethod = "close")
     public BasicDataSource  sqliteSource() {
     	
@@ -78,12 +80,12 @@ public class DBConfiguration {
         
     }
     
-
+    
     @Bean
     public SqlSessionFactory sqlSessionFactory() throws Exception {
     	
     	SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
-//    	sqlSessionFactory.setDataSource(dataSource());
+    	//sqlSessionFactory.setDataSource(dataSource());
     	sqlSessionFactory.setDataSource(sqliteSource());
 		PathMatchingResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver();
 		DefaultResourceLoader defaultResourceLoader = new DefaultResourceLoader();
@@ -103,7 +105,7 @@ public class DBConfiguration {
 		sqlSessionFactory.setConfigLocation(defaultResourceLoader.getResource("classpath:config/mybatis-config.xml"));
 		PathMatchingResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver();
 		sqlSessionFactory.setMapperLocations(resourcePatternResolver.getResources("classpath:mapper/**/*.xml"));
-//		sqlSessionFactory.setDataSource(dataSource());
+		//sqlSessionFactory.setDataSource(dataSource());
 		sqlSessionFactory.setDataSource(sqliteSource());
 		sqlSessionFactory.setCheckInterval(1000);
 		sqlSessionFactory.setProxy();
@@ -117,11 +119,14 @@ public class DBConfiguration {
 		return sqlSession;
 	}
     
-//    @Bean
-//	public DataSourceTransactionManager txManager(@Qualifier("dataSource") DataSource dataSource) {
-//		return new DataSourceTransactionManager(dataSource);
-//	}
+    //db
+    /*
+    @Bean
+    public DataSourceTransactionManager txManager(@Qualifier("dataSource") DataSource dataSource) {
+		return new DataSourceTransactionManager(dataSource);
+	}*/
     
+    //sqlite
     @Bean
     public DataSourceTransactionManager txManager(@Qualifier("sqliteSource") DataSource sqliteSource) {
     	return new DataSourceTransactionManager(sqliteSource);
