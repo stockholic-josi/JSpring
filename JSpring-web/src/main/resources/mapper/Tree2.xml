@@ -4,6 +4,22 @@
 
 <mapper namespace="tree2">
 
+<!-- 
+
+CREATE TABLE IF NOT EXISTS `test`.`tb_group` (
+  `SEQ` INT(11) NOT NULL AUTO_INCREMENT,
+  `GROUP_NAME` VARCHAR(255) NULL DEFAULT NULL,
+  `PARENT_SEQ` INT(11) NOT NULL,
+  `URL` VARCHAR(255) NULL DEFAULT NULL,
+  `LEVEL` INT(11) NULL DEFAULT NULL,
+  `ORDER_NUM` INT(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`SEQ`))
+ENGINE = MyISAM
+AUTO_INCREMENT = 383
+DEFAULT CHARACTER SET = utf8
+
+ -->
+
 	<select id="getOneTree" resultType="com.taxholic.web.admin.tree.dto.Tree">
 			SELECT
 				SEQ
