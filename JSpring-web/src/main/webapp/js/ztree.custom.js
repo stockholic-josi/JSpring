@@ -1,4 +1,4 @@
-	var zNodes = [
+﻿	var zNodes = [
 	{
 		id : 1
 		,pId : 0
@@ -250,5 +250,12 @@
 			
 		};
 	
-	window.zgTree = zgTree;		//전역변수 선언 34234234
+	window.zgTree = zgTree;		//전역변수 선언  졸라 삽질
+	
+	
+	
 }(jQuery));
+
+
+
+
