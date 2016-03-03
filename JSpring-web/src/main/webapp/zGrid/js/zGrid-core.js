@@ -607,7 +607,7 @@ var zGrid = {
 			}
 			objList.push(obj);
 		}
-		//수정된 데이터 전체 데이터
+		//수정된 데이터 전체 데이터 
 		console.log(objList);
 	},
 	/*
