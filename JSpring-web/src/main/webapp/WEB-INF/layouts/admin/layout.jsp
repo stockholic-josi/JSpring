@@ -64,7 +64,7 @@
                                 <li>
                                     <a href="/zTree/tree.do">zTree</a>
                                     <a href="/pageView/tree.do">jsTree</a>
-                                    <a href="/admin/ui/form.do">zGrid</a>
+                                    <a href="/zGrid/grid.html" target="_blank">zGrid</a>
                                     <a href="/admin/ui/form.do">UI Components</a>
                                     <a href="/admin/ui/form.do">FileUpload</a>
                                 </li>
