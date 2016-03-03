@@ -469,8 +469,24 @@ var zGrid = {
 				value = func(value,obj);
 			}
 
-			$(this).append("<div class='cell' rowId='"+ zGrid.rowCount + "' col='" + j + "' style='height:" + zGrid.initData.rowHeight + "px;text-align:" + zGrid.initData.columns[j].align + bgColor + "'>" + value+ "</div>")
+			if(zGrid.initData.dbClickEdit){
+				var colId="col_"+zGrid.rowCount+"_"+j;
+				$(this).append("<div class='cell' id="+colId+" col='" + j + "' style='height:" + zGrid.initData.rowHeight + "px;text-align:" + zGrid.initData.columns[j].align + bgColor + "'>" + value+ "</div>")
+				var divdbl = $( "#"+colId );
+				divdbl.dblclick(function(event) {
+					/*console.log($(this));
+					alert($(this).attr("id"));
+					console.log(a);*/
+					var value = $("#"+$(this).attr("id")).html();
+					$("#"+$(this).attr("id")).empty();
+					var html = "<input type='text' value='"+value+"'>";
+					$("#"+$(this).attr("id")).append(html);
+				});
+			}else{
+				$(this).append("<div class='cell' rowId='"+ zGrid.rowCount + "' col='" + j + "' style='height:" + zGrid.initData.rowHeight + "px;text-align:" + zGrid.initData.columns[j].align + bgColor + "'>" + value+ "</div>")
 
+			}
+			
 		});
 
 
