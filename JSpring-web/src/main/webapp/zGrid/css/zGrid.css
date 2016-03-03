@@ -75,7 +75,7 @@
 }
 
 #zGridWrap #zGridFin, #zGridWrap #zGridFinFix{
-	background-image : url(/data/jquery/zGrid/image/pin_01.png);
+	background-image : url(../image/pin_01.png);
 	background-repeat:no-repeat;
 	height:24px;
 	width : 24px;
