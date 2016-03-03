@@ -509,7 +509,7 @@ var zGrid = {
 	
 	editEnd : function(obj){
 		if($("#"+"data_"+obj.attr("id"))[0] != undefined){
-			if($("#"+"data_"+obj.attr("id"))[0].nodeName.toLowerCase() == "input"){
+			if($("#"+"data_"+obj.attr("id"))[0].localName == "input"){
 				var inputValue = $("#"+"data_"+obj.attr("id")).val();
 				if(changeVal != inputValue){
 					
@@ -592,10 +592,10 @@ var zGrid = {
 			if ($.inArray(e, result) == -1) result.push(e);
 		});
 		
-		console.log(result);
-		
+		//전체 데이터를 저장할 객체 리스트
 		var objList = [];
 		
+		//해당 row의 데이터들을 obj에 저장한다
 		for(var i=0;i<result.length;i++){
 			var obj = {};
 			obj["idx"] =i;
@@ -607,6 +607,7 @@ var zGrid = {
 			}
 			objList.push(obj);
 		}
+		//수정된 데이터 전체 데이터
 		console.log(objList);
 	},
 	/*
