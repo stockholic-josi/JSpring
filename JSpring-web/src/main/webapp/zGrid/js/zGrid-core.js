@@ -43,6 +43,7 @@
 
 })( jQuery );
 
+var beforeObj;
 
 var zGrid = {
 
@@ -474,20 +475,17 @@ var zGrid = {
 				$(this).append("<div class='cell' id="+colId+" col='" + j + "' style='height:" + zGrid.initData.rowHeight + "px;text-align:" + zGrid.initData.columns[j].align + bgColor + "'>" + value+ "</div>")
 				var colData = $( "#"+colId );
 				colData.dblclick(function(event) {
-					/*console.log($(this));
-					alert($(this).attr("id"));
-					console.log(a);*/
+					if(beforeObj != undefined){
+						zGrid.editEnd(beforeObj);
+					}
 					var value = $("#"+$(this).attr("id")).html();
 					$("#"+$(this).attr("id")).empty();
 					var html = "<input type='text' value='"+value+"' id='data_"+$(this).attr('id')+"'>";
 					$("#"+$(this).attr("id")).append(html);
+					beforeObj = $(this);
 				});
 				
-				colData.focusout(function() {
-					/*var inputValue = $("#"+"data_"+$(this).attr("id")).val();
-					$("#"+$(this).attr("id")).empty();
-					$("#"+$(this).attr("id")).append(inputValue);*/
-					
+				colData.focusout(function() {					
 					zGrid.editEnd($(this));
 				});
 				
@@ -505,10 +503,22 @@ var zGrid = {
 	},
 	
 	editEnd : function(obj){
-		var inputValue = $("#"+"data_"+obj.attr("id")).val();
-		$("#"+obj.attr("id")).empty();
-		$("#"+obj.attr("id")).append(inputValue);
+		if($("#"+"data_"+obj.attr("id"))[0] != undefined){
+			if($("#"+"data_"+obj.attr("id"))[0].nodeName.toLowerCase() == "input"){
+				var inputValue = $("#"+"data_"+obj.attr("id")).val();
+				$("#"+obj.attr("id")).empty();
+				$("#"+obj.attr("id")).append(inputValue);
+				$("#"+obj.attr("id")).css("border-bottom","1px solid #EC0909");
+				$("#"+obj.attr("id")).css("border-top","1px solid #EC0909");
+				$("#"+obj.attr("id")).css("border-left","1px solid #EC0909");
+				$("#"+obj.attr("id")).css("border-right","1px solid #EC0909");
+			}
+		}
+		
+		
 	},
+	
+	
 
 	/*
 	* 컬럼 데이터 셋팅
