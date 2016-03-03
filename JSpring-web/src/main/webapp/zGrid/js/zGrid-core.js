@@ -472,24 +472,42 @@ var zGrid = {
 			if(zGrid.initData.dbClickEdit){
 				var colId="col_"+zGrid.rowCount+"_"+j;
 				$(this).append("<div class='cell' id="+colId+" col='" + j + "' style='height:" + zGrid.initData.rowHeight + "px;text-align:" + zGrid.initData.columns[j].align + bgColor + "'>" + value+ "</div>")
-				var divdbl = $( "#"+colId );
-				divdbl.dblclick(function(event) {
+				var colData = $( "#"+colId );
+				colData.dblclick(function(event) {
 					/*console.log($(this));
 					alert($(this).attr("id"));
 					console.log(a);*/
 					var value = $("#"+$(this).attr("id")).html();
 					$("#"+$(this).attr("id")).empty();
-					var html = "<input type='text' value='"+value+"'>";
+					var html = "<input type='text' value='"+value+"' id='data_"+$(this).attr('id')+"'>";
 					$("#"+$(this).attr("id")).append(html);
+				});
+				
+				colData.focusout(function() {
+					/*var inputValue = $("#"+"data_"+$(this).attr("id")).val();
+					$("#"+$(this).attr("id")).empty();
+					$("#"+$(this).attr("id")).append(inputValue);*/
+					
+					zGrid.editEnd($(this));
+				});
+				
+				colData.keypress(function( event ) {
+					if ( event.which == 13 ) {
+						zGrid.editEnd($(this));
+				    	event.preventDefault();
+					}
 				});
 			}else{
 				$(this).append("<div class='cell' rowId='"+ zGrid.rowCount + "' col='" + j + "' style='height:" + zGrid.initData.rowHeight + "px;text-align:" + zGrid.initData.columns[j].align + bgColor + "'>" + value+ "</div>")
 
 			}
-			
 		});
-
-
+	},
+	
+	editEnd : function(obj){
+		var inputValue = $("#"+"data_"+obj.attr("id")).val();
+		$("#"+obj.attr("id")).empty();
+		$("#"+obj.attr("id")).append(inputValue);
 	},
 
 	/*
