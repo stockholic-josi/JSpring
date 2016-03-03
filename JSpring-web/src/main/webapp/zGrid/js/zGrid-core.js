@@ -43,7 +43,7 @@
 
 })( jQuery );
 
-var beforeObj;
+//var beforeThis;
 
 var zGrid = {
 
@@ -64,8 +64,10 @@ var zGrid = {
 		paging : {limit:0,pageSize:10},	//페이징
 		page : 1									//첫 페이지
 	},
-
-
+	
+	beforeThis : null,
+	editVals : [],
+	changeVal : "",
 	//그리드 초기화
 	initGrid : function(){
 
@@ -469,20 +471,23 @@ var zGrid = {
 				var func = zGrid.initData.columns[j].renderer;
 				value = func(value,obj);
 			}
+			var colId="col_"+zGrid.rowCount+"_"+j;
+			$(this).append("<div class='cell' id="+colId+" rowId='"+ zGrid.rowCount + "' col='" + j + "' style='height:" + zGrid.initData.rowHeight + "px;text-align:" + zGrid.initData.columns[j].align + bgColor + "'>" + value+ "</div>")
 
-			if(zGrid.initData.dbClickEdit){
-				var colId="col_"+zGrid.rowCount+"_"+j;
-				$(this).append("<div class='cell' id="+colId+" col='" + j + "' style='height:" + zGrid.initData.rowHeight + "px;text-align:" + zGrid.initData.columns[j].align + bgColor + "'>" + value+ "</div>")
+			if( zGrid.initData.columns[j].editable == true) {
+				
+				
 				var colData = $( "#"+colId );
 				colData.dblclick(function(event) {
-					if(beforeObj != undefined){
-						zGrid.editEnd(beforeObj);
+					if(zGrid.beforeThis != undefined){
+						zGrid.editEnd(zGrid.beforeThis);
 					}
 					var value = $("#"+$(this).attr("id")).html();
+					changeVal = value;
 					$("#"+$(this).attr("id")).empty();
 					var html = "<input type='text' value='"+value+"' id='data_"+$(this).attr('id')+"'>";
 					$("#"+$(this).attr("id")).append(html);
-					beforeObj = $(this);
+					zGrid.beforeThis = $(this);
 				});
 				
 				colData.focusout(function() {					
@@ -495,10 +500,10 @@ var zGrid = {
 				    	event.preventDefault();
 					}
 				});
-			}else{
-				$(this).append("<div class='cell' rowId='"+ zGrid.rowCount + "' col='" + j + "' style='height:" + zGrid.initData.rowHeight + "px;text-align:" + zGrid.initData.columns[j].align + bgColor + "'>" + value+ "</div>")
-
 			}
+			
+			zGrid.colCount = j;
+			
 		});
 	},
 	
@@ -506,12 +511,18 @@ var zGrid = {
 		if($("#"+"data_"+obj.attr("id"))[0] != undefined){
 			if($("#"+"data_"+obj.attr("id"))[0].nodeName.toLowerCase() == "input"){
 				var inputValue = $("#"+"data_"+obj.attr("id")).val();
+				if(changeVal != inputValue){
+					
+					$("#"+obj.attr("id")).css("border-bottom","1px solid #EC0909");
+					$("#"+obj.attr("id")).css("border-top","1px solid #EC0909");
+					$("#"+obj.attr("id")).css("border-left","1px solid #EC0909");
+					$("#"+obj.attr("id")).css("border-right","1px solid #EC0909");
+					
+					zGrid.editVals.push(obj.attr("rowId"));
+				}
 				$("#"+obj.attr("id")).empty();
 				$("#"+obj.attr("id")).append(inputValue);
-				$("#"+obj.attr("id")).css("border-bottom","1px solid #EC0909");
-				$("#"+obj.attr("id")).css("border-top","1px solid #EC0909");
-				$("#"+obj.attr("id")).css("border-left","1px solid #EC0909");
-				$("#"+obj.attr("id")).css("border-right","1px solid #EC0909");
+				
 			}
 		}
 		
@@ -570,7 +581,34 @@ var zGrid = {
 		return $.param(obj, true);
 
 	},
-
+	
+	/*
+	 * 로우 수정
+	 * 
+	 */
+	editRow : function(){
+		var result = [];
+		$.each(zGrid.editVals, function(i, e) {
+			if ($.inArray(e, result) == -1) result.push(e);
+		});
+		
+		console.log(result);
+		
+		var objList = [];
+		
+		for(var i=0;i<result.length;i++){
+			var obj = {};
+			obj["idx"] =i;
+			
+			for(var j=0;j<zGrid.colCount;j++){
+				if(zGrid.initData.columns[j].columnId != undefined){
+					obj[zGrid.initData.columns[j].columnId] = $("#col_"+result[i]+"_"+j).html();
+				}
+			}
+			objList.push(obj);
+		}
+		console.log(objList);
+	},
 	/*
 	* store 추가
 	* Object
@@ -595,6 +633,7 @@ var zGrid = {
 	refresh : function(){
 		zGrid.$grid.find(".zData .cell").remove();
 		zGrid.rowCount = 0;
+		zGrid.colCount = 0;
 		zGrid.setGridData();
 	},
 	
@@ -604,6 +643,7 @@ var zGrid = {
 	removeAll : function(){
 		zGrid.$grid.find("#zData .cell").remove();
 		zGrid.rowCount = 0;
+		zGrid.colCount = 0;
 	},
 
 	/*

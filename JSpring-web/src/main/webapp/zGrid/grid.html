@@ -56,7 +56,7 @@ $(window).load(function(){
 			{columnId : "idx", columnNm: "번호", width: 50, align:"center", type : "int", sortable : true},
 			{columnId : "property", columnNm: "속성", width: 100, align:"center", sortable : true},
 			{columnId : "type", columnNm: "타입", width: 100, align:"center", sortable : true},
-			{columnId : "comment", columnNm: "설명", width: 300, align:"left", sortable : true},
+			{columnId : "comment", columnNm: "설명", width: 300, align:"left", sortable : true, editable:true},
 			{columnId : "num", columnNm: "금액", width: 100, align:"center", sortable : true, renderer : currency},
 			{columnId : "file", columnNm: "파일", width: 50, align:"center",renderer : fileImg},
 			{columnId : "dumy", columnNm: "더미1", width: 80, align:"center"},
@@ -73,8 +73,8 @@ $(window).load(function(){
 		params :$("#frm").serializeObject(),
 		paging : { limit : 0 ,pageSize : 10},		//paging, limit : 0 이면 로컬 쇼팅 & 페이지징 없음
 		page : 1,											//첫페이지
-		checkbox : { width:40, align : "center" },				//check box 
-		dbClickEdit : true
+		checkbox : { width:40, align : "center" }				//check box 
+		
 	}) ;
 
 });
@@ -93,6 +93,7 @@ $(window).load(function(){
 <div style="margin-top:30px">
 <button onClick="zGrid.util.console(zGrid.removeRow('idx'))">삭제</button>
 <button onClick="addRow()">추가</button>
+<button onClick="zGrid.util.console(zGrid.editRow())">수정</button>
 </div>
 
 
