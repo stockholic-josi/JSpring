@@ -291,6 +291,9 @@ var zGrid = {
 
 	//그리드 쇼팅
 	setSort : function(obj,columns, columnId, i){
+		//소팅하면 수정 한 내역 초기화
+		zGrid.editVals = [];
+		
 		columns.each(function(){
 			if($(this).index() != i) $(this).find(".sort").text("");
 		});
@@ -591,6 +594,9 @@ var zGrid = {
 	 */
 	editRow : function(){
 		var result = [];
+		if(zGrid.editVals.length == 0){
+			return;
+		}
 		$.each(zGrid.editVals, function(i, e) {
 			if ($.inArray(e, result) == -1) result.push(e);
 		});
