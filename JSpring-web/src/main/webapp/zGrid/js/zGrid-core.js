@@ -518,19 +518,22 @@ var zGrid = {
 					$("#"+obj.attr("id")).css("border-left","1px solid #EC0909");
 					$("#"+obj.attr("id")).css("border-right","1px solid #EC0909");
 					
-					zGrid.editVals.push(obj.attr("rowId"));
+					
+					for(var i=0;i<zGrid.initData.columns.length;i++){
+						if(zGrid.initData.columns[i].columnId == "idx"){
+							zGrid.editVals.push($("#dataWrap").children("div").eq(i).children("div").eq(obj.attr("rowId")-1).html()+"_"+obj.attr("rowId"));
+						}
+					}
+					
+					//zGrid.editVals.push(obj.attr("rowId"));
 				}
 				$("#"+obj.attr("id")).empty();
 				$("#"+obj.attr("id")).append(inputValue);
 				
 			}
 		}
-		
-		
 	},
 	
-	
-
 	/*
 	* 컬럼 데이터 셋팅
 	* 순서, key, value
@@ -598,11 +601,25 @@ var zGrid = {
 		//해당 row의 데이터들을 obj에 저장한다
 		for(var i=0;i<result.length;i++){
 			var obj = {};
-			obj["idx"] =i;
+			
+			var checkidx = 0;
 			
 			for(var j=0;j<zGrid.colCount;j++){
-				if(zGrid.initData.columns[j].columnId != undefined){
-					obj[zGrid.initData.columns[j].columnId] = $("#col_"+result[i]+"_"+j).html();
+				if(zGrid.initData.columns[j].columnId == "idx"){
+					checkidx = j;
+					//obj["idx"] =$("#col_"+result[i]+"_"+j).html();
+				}
+				if(zGrid.initData.columns[j].columnId != undefined && zGrid.initData.columns[j].editable != undefined){
+					
+					
+					
+					if(zGrid.initData.columns[j].editable == true){
+						
+						var rIdx = result[i].indexOf("_");
+						obj[zGrid.initData.columns[j].columnId] = $("#col_"+result[i].substring(rIdx+1,result[i].length)+"_"+j).html();
+						
+						obj["idx"] = result[i].substring(0,rIdx);
+					}					
 				}
 			}
 			objList.push(obj);
