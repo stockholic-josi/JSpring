@@ -593,7 +593,9 @@ var zGrid = {
 	 * 
 	 */
 	editRow : function(){
+		
 		var result = [];
+		
 		if(zGrid.editVals.length == 0){
 			return;
 		}
@@ -605,6 +607,7 @@ var zGrid = {
 		var objList = [];
 		
 		//해당 row의 데이터들을 obj에 저장한다
+		//변경된 값의 idx와 내용을 저장한다
 		for(var i=0;i<result.length;i++){
 			var obj = {};
 			
@@ -613,11 +616,8 @@ var zGrid = {
 			for(var j=0;j<zGrid.colCount;j++){
 				if(zGrid.initData.columns[j].columnId == "idx"){
 					checkidx = j;
-					//obj["idx"] =$("#col_"+result[i]+"_"+j).html();
 				}
 				if(zGrid.initData.columns[j].columnId != undefined && zGrid.initData.columns[j].editable != undefined){
-					
-					
 					
 					if(zGrid.initData.columns[j].editable == true){
 						
