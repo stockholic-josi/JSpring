@@ -221,8 +221,10 @@ var zGrid = {
 						zGrid.$grid.find('#zGridWrap #zGridFin').mouseout(function(){$(this).hide()});
 						zGrid.$grid.find('#zGridWrap #zGridFin').unbind('click');
 						zGrid.$grid.find('#zGridWrap #zGridFin').bind("click",function(){
-							zGrid.setFixColumn(obj)
-						})
+							zGrid.setFixColumn(obj);
+						});
+						
+						
 				});
 
 				$(this).parent().mouseout(function(e){
@@ -231,6 +233,14 @@ var zGrid = {
 				});
 			}
 
+		});
+		
+		zGrid.$grid.find("#zGridWrap #zGridFinFix").bind("click",function(){
+			//zGrid.setFixColumn(obj)
+			//	alert("1");
+			console.log($(this));
+			zGrid.setFixColumn($(this))
+				return;
 		});
 
 
@@ -706,8 +716,9 @@ var zGrid = {
 			zGrid.$grid.find("#dataFixWrap").css({"border-right": "1px solid #ccacac"}) 
 
 			zGrid.setScrollbar();
-		}else if(obj.parent().attr("id") == "headerFixWrap"){
+		}else if(obj.attr("id") == "zGridFinFix"){
 
+			$("#zGridFinFix").hide();
 			for(i = obj.parent().find(".column").length  -1; i > col; i--){
 
 
@@ -737,7 +748,10 @@ var zGrid = {
 		
 		//pin 표시
 		var pin = zGrid.$grid.find("#headerFixWrap .column:last");
-		zGrid.$grid.find('#zGridWrap #zGridFinFix').css({ "top": pin.offset().top, "left":  pin.offset().left + pin.width() - 26 }).show();
+		if(pin.length !=0){
+			zGrid.$grid.find('#zGridWrap #zGridFinFix').css({ "top": pin.offset().top, "left":  pin.offset().left + pin.width() - 26 }).show();
+		}
+		
 
 	},
 
