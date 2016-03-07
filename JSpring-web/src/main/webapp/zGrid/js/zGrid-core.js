@@ -716,7 +716,7 @@ var zGrid = {
 			zGrid.$grid.find("#dataFixWrap").css({"border-right": "1px solid #ccacac"}) 
 
 			zGrid.setScrollbar();
-		}else if(obj.attr("id") == "zGridFinFix"){
+		}else if(obj.attr("id") == "zGridFinFix" || obj.parent().attr("id") == "headerFixWrap"){
 
 			$("#zGridFinFix").hide();
 			for(i = obj.parent().find(".column").length  -1; i > col; i--){
