@@ -161,7 +161,7 @@
 	
     <dependency>
     	 <groupId>org.lazyluke</groupId>
-		<artifactId>`-remix</artifactId>
+		<artifactId>log4jdbc-remix</artifactId>
    </dependency>
    
    <dependency>
@@ -307,6 +307,12 @@
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
 		</dependency>
+		
+	<dependency>
+	    <groupId>args4j</groupId>
+	    <artifactId>args4j</artifactId>
+	</dependency>
+		
  
   </dependencies>
   
